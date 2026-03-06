@@ -1,0 +1,355 @@
+        body {
+            font-family: Arial, sans-serif;
+            background: #191f33;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        header {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 16px 0;
+            text-align: center;
+        }
+
+        header img {
+            height: 32px;
+            vertical-align: middle;
+        }
+
+        .container {
+            background: url(https://cdn.stackpath.web.id/25/lazback.png) no-repeat center center;
+            background-size: 100% 100%;
+            max-width: 900px;
+            margin: 32px auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 32px 24px;
+            display: flex;
+            gap: 32px;
+            box-shadow: 0px 0px 4px 0px #00000082;
+        }
+
+        .app-icon {
+            flex: 0 0 128px;
+            text-align: center;
+        }
+
+        .app-icon img {
+            width: 128px;
+            border-radius: 24px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .app-info {
+            flex: 1;
+        }
+
+        .app-title {
+            font-size: 18px;
+            margin: 0 0 8px 0;
+            color: #9db6db;
+        }
+
+        .dev-name {
+            color: #2196f3;
+            font-size: 1em;
+            margin-bottom: 12px;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 1.2em;
+        }
+
+        .rating-value {
+            color: #c6c5ca;
+            font-weight: bold;
+        }
+
+        .rating-votes {
+            color: #d3c8c8;
+            font-weight: bold;
+        }
+
+        .download-btn {
+            background: #2196f3;
+            color: #fff;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: background 0.2s;
+        }
+
+        .download-btn:hover {
+            background: #1769aa;
+        }
+
+        .app-desc {
+            color: #9f9f9f;
+            font-size: 1.1em;
+            margin-bottom: 24px;
+        }
+
+        .app-details {
+            background: #0f131fe3;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 0.98em;
+            color: #d7d7d7;
+            margin-bottom: 16px;
+            line-height: 14px;
+        }
+
+        .game-description {
+            margin-top: 0px;
+            color: #d5d5d5;
+            font-size: 13px;
+            margin-bottom: -4px;
+            padding: 10px;
+        }
+        .faqs-section {
+            margin-top: 0px;
+            color: #d5d5d5;
+            font-size: 13px;
+            margin-bottom: -4px;
+            padding: 10px;
+        }
+
+        .app-view__AppDetailsContainer-sc-oiuh9w-4 {
+            margin: 24px auto 0 auto;
+            max-width: 600px;
+            background: #18243a;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 0 0 8px 0;
+        }
+
+        .app-view__TabsContainer-sc-oiuh9w-5 {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px 0 16px;
+            border-bottom: 1px solid #26344e;
+        }
+
+        .app-view__AppViewTab-sc-oiuh9w-7 {
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 16px;
+            color: #9db6db;
+            padding: 8px 18px;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            background: none;
+            border: none;
+            outline: none;
+            font-weight: 500;
+            margin-bottom: -1px;
+        }
+
+        .app-view__AppViewTab-sc-oiuh9w-7.eiySUK {
+            background: #22325a;
+            color: #fff;
+            font-weight: 700;
+            border-bottom: 2px solid #1da1f2;
+            z-index: 1;
+        }
+
+        .app-view__AppViewTab-sc-oiuh9w-7.jbbpIZ:hover {
+            background: #22325a;
+            color: #fff;
+        }
+                .versions__VersionsItemContainer-sc-1qeurd6-7 {
+                    background: #181f2a;
+                    border-radius: 14px;
+                    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+                    padding: 24px 20px;
+                    margin-bottom: 24px;
+                    max-width: 520px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                .versions__LastVersionHeader-sc-1qeurd6-11 {
+                    color: #9db6db;
+                    font-size: 15px;
+                    margin-bottom: 18px;
+                    font-family: 'Teko', 'Roboto', Arial, sans-serif;
+                    letter-spacing: 1px;
+                    text-align: left;
+                    padding-left: 9px;
+                }
+                .versions__VersionItemContainer-sc-1qeurd6-1 {
+                    width: 95%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    background: #232c3b;
+                    border-radius: 10px;
+                    padding: 18px 16px;
+                    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+                    justify-self: center;
+                }
+                .versions__DetailsColumn-sc-1qeurd6-3 {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 6px;
+                }
+                .versions__VersionItemTitle-sc-1qeurd6-6 {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    color: #fff;
+                }
+                .versions__TrustedIcon-sc-1qeurd6-8 {
+                    width: 20px;
+                    height: 20px;
+                }
+                .versions__DetailsRow-sc-1qeurd6-5 {
+                    display: flex;
+                    gap: 18px;
+                    font-size: 0.98rem;
+                }
+                .appview-header__AppViewSpan-sc-weylp4-13 {
+                    font-family: 'Roboto', Arial, sans-serif;
+                }
+                .iJfTuT {
+                    color: #b0b8c1 !important;
+                    font-size: 0.97rem;
+                }
+                .hdwVVt {
+                    color: #b0b8c1 !important;
+                    font-size: 0.97rem;
+                }
+                .gIkYdN {
+                    color: #fff !important;
+                    font-size: 1.08rem;
+                }
+                .versions__DownloadContainer-sc-1qeurd6-4 {
+                    display: flex;
+                    align-items: center;
+                }
+                .version-download-btn {
+                    background: linear-gradient(90deg, #1da1f2 0%, #3a8dde 100%);
+                    color: #fff !important;
+                    border: none;
+                    border-radius: 6px;
+                    padding: 10px 28px;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    box-shadow: 0 2px 8px rgba(29,161,242,0.12);
+                    transition: background 0.2s, box-shadow 0.2s;
+                    cursor: pointer;
+                    outline: none;
+                    display: inline-block;
+                }
+                .version-download-btn:hover, .version-download-btn:focus {
+                    background: linear-gradient(90deg, #3a8dde 0%, #1da1f2 100%);
+                    box-shadow: 0 4px 16px rgba(29,161,242,0.18);
+                    text-decoration: none;
+                }
+                .info__InfoContainer-sc-1q3osbl-0.geZfTX {
+                    background: #181f2a;
+                    border-radius: 12px;
+                    padding: 24px 20px;
+                    color: #e3e9f3;
+                    font-family: 'Roboto', Arial, sans-serif;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+                    max-width: 600px;
+                }
+                .info__APKInformation-sc-1q3osbl-5.dMZnbg {
+                    margin-bottom: 18px;
+                }
+                .info__APKHeaderTitle-sc-1q3osbl-7.ckkSOj {
+                    font-size: 1.3em;
+                    color: #9db6db;
+                    margin-bottom: 12px;
+                    font-family: 'Teko', Arial, sans-serif;
+                    letter-spacing: 1px;
+                }
+                .info__APKDetail-sc-1q3osbl-8.jNjvUq,
+                .info__Value-sc-1q3osbl-12.ljigGJ {
+                    display: block;
+                    margin-bottom: 7px;
+                    font-size: 12px;
+                    color: #e3e9f3;
+                }
+                .info__InfoAnchor-sc-1q3osbl-9.jXmlxC {
+                    color: #1da1f2;
+                    text-decoration: none;
+                    margin-left: 4px;
+                    word-break: break-all;
+                }
+                .info__InfoAnchor-sc-1q3osbl-9.jXmlxC:hover {
+                    text-decoration: underline;
+                }
+                .info__DetailsInformations-sc-1q3osbl-10.jRooCZ {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 12px;
+                }
+                .info__DetailsCol-sc-1q3osbl-11.cogrwL {
+                    flex: 1 1 100%;
+                }
+                .review {
+                    background: #121826e3;
+                    border-radius: 12px;
+                    padding: 16px;
+                    margin-bottom: 16px;
+                    color: #d5d5d5;
+                    font-size: 14px;
+                    line-height: 1.5;
+                }
+        @media (max-width: 700px) {
+            .container {
+                width: 93%;
+                flex-direction: column;
+                padding: 14px 10px;
+                gap: 16px;
+            }
+            .app-icon {
+                margin-bottom: 12px;
+            }
+            .app-view__AppDetailsContainer-sc-oiuh9w-4 {
+                max-width: 100%;
+                border-radius: 0;
+            }
+            .app-view__TabsContainer-sc-oiuh9w-5 {
+                padding: 8px 4px 0 4px;
+                gap: 4px;
+            }
+            .app-view__AppViewTab-sc-oiuh9w-7 {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+            .versions__VersionItemContainer-sc-1qeurd6-1 {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 14px;
+                    }
+                    .versions__VersionsItemContainer-sc-1qeurd6-7 {
+                        padding: 16px 6px;
+                    }
+                    .info__InfoContainer-sc-1q3osbl-0.geZfTX {
+                        padding: 14px 11px;
+                        font-size: 14px;
+                    }
+                    .info__APKHeaderTitle-sc-1q3osbl-7.ckkSOj {
+                        font-size: 10p;
+                    }
+        }
