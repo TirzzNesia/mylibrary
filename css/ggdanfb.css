@@ -1,5 +1,5 @@
-/* login-popup.css */
-.popup-login, .popup-tirzz {
+/* login-popup.css - versi fix scroll */
+.popup-login, .popup-ariandi {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,14 +12,14 @@
     z-index: 9999;
     padding: 16px;
     box-sizing: border-box;
-    overflow-y: auto;
+    overflow-y: auto; /* penting: biar bisa scroll kalau konten lebih tinggi */
     margin: 0;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s, visibility 0.3s;
 }
 
-.popup-login.visible, .popup-tirzz.visible {
+.popup-login.visible, .popup-ariandi.visible {
     opacity: 1;
     visibility: visible;
 }
@@ -35,6 +35,8 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     animation: fadeIn 0.3s;
     position: relative;
+    max-height: 90vh; /* batasi tinggi */
+    overflow-y: auto;  /* scroll di dalam box */
 }
 
 .popup-select .box {
