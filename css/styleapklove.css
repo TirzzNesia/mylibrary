@@ -1,0 +1,452 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif !important;
+}
+body{
+    background-color: rgb(32, 33, 36);
+}
+a{
+    text-decoration: none !important;
+}
+.preview-block{
+    width: 100vw;
+    overflow: hidden;
+    position: absolute;
+    height: 56.25vw;
+    top: 0;
+    z-index: -1000;
+    width: 100vw;
+}
+.preview-video{
+    width: 100vw;
+    object-fit: cover;
+    z-index: -1000;
+
+}
+.shadow{
+    background: linear-gradient(to top,#202124 20%,rgba(0,0,0,0) 100%);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    position: absolute;
+}
+.app-logo{
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin: 7px 24px 0 0;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15);
+}
+.header{
+    display: flex;
+    gap: 0.6rem;
+    margin: 1rem;
+}
+.app-name{
+    font-size: 1.5rem;
+    color: rgb(232, 234, 237);
+    letter-spacing: 0;
+    word-break: keep-all;
+    line-height:2rem;
+}
+.app-info_main{
+    letter-spacing: .00625em;
+    font-weight: 500;
+    display: flex;
+    color: #01875f;
+    line-height: 1.5rem;
+    font-size: 1rem;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    margin-top: 4px;
+}
+.app-info_block{
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+}
+.add-info_block{
+    display: flex;
+    justify-content: flex-start;
+    margin: 1rem;
+    padding:16px 0 ;
+}
+.info{
+    width: 33.3333%;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.info_first{
+    border-right:1px solid #d8d8dc;
+}
+.info_second{
+    border-right:1px solid #d8d8dc;
+}
+.info span{
+    font-weight: 600;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    color: rgb(232, 234, 237);
+}
+.info p{
+    color:rgb(95, 99, 104);
+    font-size: 12px;
+    margin-top: 4px;
+}
+.info span img{
+    height: 12px;
+    width: 12px;
+}
+.pegi{
+    width: 24px;
+}
+.rate-block{
+    display: flex;
+    flex-wrap: wrap;
+}
+.rate{
+    white-space: nowrap;
+    display: flex;
+
+}
+.download-amount{
+    color: #616161;
+    margin-left: 3px;
+}
+.user-icon{
+    width: 1rem;
+    height: 1rem;
+    margin-left: 3px;
+}
+.star{
+    width: 10px;
+    height: 10px;
+}
+.actions-block{
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+
+    flex-direction: column;
+}
+.install-btn{
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    background-color: #01875f;
+    border-radius: 8px;
+    color: #202124;
+    font-weight: 700;
+}
+.wishlist-btn{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 48px;
+    outline: 0;
+    margin: 0 auto;
+    width: fit-content;
+    border: 0;
+    background-color: transparent;
+    color: #01875f;
+    font-weight: 700;
+    font-size: 14px;
+    gap: 0.4rem;
+}
+.wishlist-btn img{
+    width: 24px;
+    height: 24px;
+}
+.ad-contains{
+    color: #616161;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+.app-photo_block{
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto;
+}
+.app-photo{
+    border-width: 0;
+    object-fit: cover;
+    width: 124px;
+    min-width: 124px;
+    height: 220px;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15);
+}
+.about{
+    padding: 20px 1rem;
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+}
+.arrow{
+    width: 20px;
+    height: 20px;
+}
+.app-desc{
+    font-weight: 400;
+    letter-spacing: .0142857143em;
+    font-size: .875rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+    font-size: .875rem;
+    padding: 0 1rem 1rem 1rem;
+    line-height: 1.25rem;
+    color: rgb(128,128,128);
+}
+.up-block{
+    padding: 1rem 1rem;
+}
+.up-block_title{
+    color: #fff;
+    font-size: .875rem;
+    font-weight: 500;
+    letter-spacing: .0178571429em;
+}
+.up-block_desc{
+    font-size: .875rem;
+    font-weight: 400;
+    letter-spacing: .0142857143em;
+    line-height: 1.25rem;
+    margin-top: 4px;
+    color: rgb(128,128,128);
+}
+
+.data-block{
+    padding: 1rem 1rem 0 1rem;
+}
+.data-block_title{
+    color: #fff;
+    font-size: 18px;
+
+    font-weight: 500;
+    letter-spacing: .0178571429em;
+
+}
+.data-block_desc{
+    margin-top: 20px;
+    font-size: .875rem;
+    font-weight: 400;
+    letter-spacing: .0142857143em;
+    line-height: 1.25rem;
+
+    color: rgb(128,128,128);
+}
+
+.reviews-block{
+    padding: 1rem;
+}
+.reviews-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.reviews-header_name{
+    float:left;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: none;
+    width: fit-content;
+
+}
+.verified-block{
+    margin:  20px 0;
+    font-size: .75rem;
+    font-weight: 400;
+    color: rgb(128,128,128);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.policy-block{
+    display: flex;
+    align-items: center;
+}
+.star-main{
+    width: 16px;
+    height: 16px;
+}
+.rate-big{
+    color: #fff;
+    font-size: 64px;
+    font-weight: 400;
+}
+.rate-blocks{
+    display: flex;
+}
+.rate_first-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    width: fit-content;
+}
+.rate_second-block{
+    width: 100%;
+    max-width: 260px;
+    padding: 30px 16px  30px;
+    display: inline-block;
+}
+.rate-total{
+    font-size: 12px;
+    margin-top: 1rem;
+    white-space: nowrap;
+    font-weight: 400;
+
+    letter-spacing: 0.3px;
+    color: rgb(128,128,128);
+}
+.user-second{
+    vertical-align: middle !important;
+    margin-bottom: 2px;
+}
+.rate-num{
+    font-size: 11px;
+    left: -16px;
+    letter-spacing: 1px;
+    text-align: left;
+    color: #fff;
+    font-weight: 400;
+    position: absolute;
+}
+.rate-line{
+    display: inline-block;
+    max-width: 120px;
+
+}
+.rate-line5{
+    width: 80%;
+    height: 100%;
+    background-color: rgb(168,200,251);
+    border-radius: 9999px;
+}
+.rate-line4{
+    width: 40%;
+    height: 100%;
+    background-color: rgb(168,200,251);
+    border-radius: 9999px;
+
+}
+.rate-line3{
+    width: 4%;
+    height: 100%;
+    background-color: rgb(168,200,251);
+    border-radius: 9999px;
+}
+.rate-line_block{
+    position: relative;
+    height: 10px;
+    margin-bottom: 6px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    font-weight: 400;
+    display: flex;
+    border-radius: 9999px;
+}
+.comment-author_rate{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.comment-block{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+}
+.photo_undefined{
+    width: 32px;
+    height:32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:50%;
+    background-color: #9ace6a;
+    color: white;
+    font-size: 16px;
+    user-focus: none;
+    user-select: none;
+    margin-right: 0.5rem;
+}
+.user-photo_block{
+    display: flex;
+    align-items: center;
+
+}
+.photo-block{
+    height: 48px;
+    display: flex;
+    align-items: center;
+}
+.photo-block img{
+    margin-right: 0.5rem;
+}
+
+.user-photo{
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    user-focus: none;
+    user-select: none;
+}
+.second_comment-block{
+
+}
+.comment-author{
+    line-height: 24px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+}
+.comment-author_name{
+    font-size: 14px;
+    color: #fff;
+}
+.star-comment{
+    width: 12px;
+    height: 12px;
+
+}
+.comment-author_time{
+    color: #fff;
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: normal;
+    letter-spacing: .025em;
+    margin-left: 1ch;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.comment-text{
+    word-wrap: break-word;
+    hyphens: auto;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #808080;
+    font-weight: 300;
+}
