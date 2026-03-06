@@ -1,5 +1,5 @@
 /* login-popup.css */
-.popup-login, .popup-ariandi {
+.popup-login, .popup-tirzz {
     position: fixed;
     top: 0;
     left: 0;
@@ -19,7 +19,7 @@
     transition: opacity 0.3s, visibility 0.3s;
 }
 
-.popup-login.visible, .popup-ariandi.visible {
+.popup-login.visible, .popup-tirzz.visible {
     opacity: 1;
     visibility: visible;
 }
