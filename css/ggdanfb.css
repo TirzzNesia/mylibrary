@@ -1,11 +1,5 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    font-family: 'Roboto', sans-serif;
-    min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-  }
-
   /* ── Overlay ── */
   .overlay {
     display: none; position: fixed; inset: 0;
