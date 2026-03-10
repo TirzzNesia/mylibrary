@@ -1,4 +1,4 @@
-    (function() {
+(function() {
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         let w, h, particles, animId;
