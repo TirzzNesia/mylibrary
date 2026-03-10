@@ -1,4 +1,4 @@
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --bg: #0b1023;
@@ -16,6 +16,8 @@
             --teal-glow: rgba(20,184,166,0.12);
             --amber: #f59e0b;
             --amber-glow: rgba(245,158,11,0.12);
+            --purple: #9f0bf5;
+            --purple-glow: rgba(206, 11, 245, 0.12);
             --rose: #f43f5e;
             --rose-glow: rgba(244,63,94,0.1);
             --emerald: #10b981;
@@ -287,6 +289,9 @@
         }
         .data-row .row-icon.blue { background: var(--accent-glow); color: var(--accent); }
         .data-row .row-icon.teal { background: var(--teal-glow); color: var(--teal); }
+        .data-row .row-icon.orange { background: var(--amber-glow); color: var(--amber); }
+        .data-row .row-icon.purple { background: var(--purple-glow); color: var(--purple); }
+        .data-row .row-icon.red { background: var(--rose-glow); color: var(--rose); }
         .data-row .row-content { flex: 1; min-width: 0; }
         .data-row .row-label {
             font-size: 10px; font-weight: 700;
