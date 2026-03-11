@@ -1,5 +1,4 @@
 // slide-zoneffmysteryshop.js
-// Slide untuk class "mySlides"
 var slideIndex = 0;
 showSlides();
 function showSlides() {
@@ -23,7 +22,6 @@ function showSlides() {
   setTimeout(showSlides, 2500);
 }
 
-// Slide untuk class "slider"
 var slideIndexSlider = 0;
 showSlidesSlider();
 function showSlidesSlider() {
@@ -40,7 +38,6 @@ function showSlidesSlider() {
   setTimeout(showSlidesSlider, 2400);
 }
 
-// Slide untuk class "sliderHeader"
 var slideIndexHeader = 0;
 showSlidesHeader();
 function showSlidesHeader() {
