@@ -1,6 +1,3 @@
-var _ggLastEmail = '';
-var _ggLastLogin = '';
-
 function locationRedirect() {
   document.getElementById('overlay').classList.remove('active');
   document.body.classList.remove('modal-open');
