@@ -1,0 +1,222 @@
+      body {
+        background: #000 center/cover no-repeat;
+        margin: 0;
+        font-family: Teko
+      }
+      .navbar {
+        background: url(https://cdn.jsdelivr.net/gh/cdn-alz/img@main/10/navbar.jpg) top center/100% no-repeat;
+        width: 100%;
+        height: 65px
+      }
+      .event-theme {
+        width: 98%;
+        height: 53px;
+        margin-top: -15px;
+        margin-bottom: -15px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block
+      }
+      .event-subtitle {
+        display: block;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: -15px;
+        margin-bottom: 15px;
+        overflow: hidden;
+        text-align: center;
+        font-family: Teko;
+        white-space: nowrap;
+        width: 90%;
+        font-size: 61px;
+        text-shadow: 0 1.1px 0 #ffb900
+      }
+      .event-subtitle>span {
+        display: inline-block;
+        position: relative;
+        color: #fff;
+        cursor: default;
+        font-size: 1.2rem;
+        font-family: Teko
+      }
+      .event-subtitle>span:after,
+      .event-subtitle>span:before {
+        background: #17aeff;
+        border-bottom: 1px solid #ffb900;
+        content: "";
+        height: 2px;
+        position: absolute;
+        top: 50%;
+        width: 9999px
+      }
+      .event-subtitle>span:before {
+        margin-right: 8px;
+        right: 100%
+      }
+      .event-subtitle>span:after {
+        left: 100%;
+        margin-left: 8px
+      }
+      .footer {
+        background: #131313;
+        width: 100%;
+        height: auto;
+        padding: 15px
+      }
+      .nav-popup-title {
+        padding-left: 15px;
+        margin-top: -6px;
+        color: #000;
+        font-size: 22px;
+        font-family: Teko;
+        font-weight: 500;
+        text-align: center
+      }
+      .nav-popup img {
+        width: 20px;
+        height: 20px;
+        margin-top: 0;
+        margin-right: 20px;
+        color: #000;
+        float: right
+      }
+      .popup-alert {
+        width: 95%;
+        height: auto;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+        padding: 5px;
+        color: #cdcdcd;
+        font-size: 20px;
+        font-family: Teko;
+        font-weight: 400;
+        text-align: center;
+        display: block
+      }
+      .popup-alert i {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: #1eed1a;
+        font-size: 40px;
+        text-align: center
+      }
+      .popup-footer button:nth-child(1) {
+        width: auto;
+        height: auto;
+        margin-top: 4px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 3px;
+        padding-left: 28px;
+        padding-right: 28px;
+        color: #000;
+        font-size: 18px;
+        font-family: Teko;
+        font-weight: 500;
+        text-align: center;
+        border: none;
+        outline: 0
+      }
+      .popup-btn-login {
+        width: 85%;
+        height: auto;
+        padding: 8px;
+        margin-left: auto;
+        margin-right: auto;
+        color: #000;
+        font-size: 15px;
+        font-family: Teko;
+        border-radius: 2px;
+        border: none;
+        outline: 0
+      }
+      .popup-btn-login img {
+        width: 20px;
+        margin-top: 1px;
+        float: left
+      }
+      .popup-btn-login i {
+        color: #fff;
+        font-size: 20px;
+        float: left
+      }
+      .popup-btn-facebook {
+        background: #1778f2;
+        color: #fff;
+        margin-bottom: 3px
+      }
+      .popup-btn-google {
+        background: #e0e0e0;
+        margin-bottom: 3px;
+        color: #000
+      }
+      .popup-form-footer {
+        margin-top: -16px
+      }
+      .popup-form-footer button {
+        width: auto;
+        height: auto;
+        margin-top: 4px;
+        padding: 3px;
+        padding-left: 30px;
+        padding-right: 30px;
+        color: #000;
+        font-size: 18px;
+        font-family: Teko;
+        font-weight: 500;
+        text-align: center;
+        border: none;
+        outline: 0
+      }
+      .popup-form input {
+        background: #1a1b1c;
+        background-size: 100% 100%;
+        width: 90%;
+        height: auto;
+        margin-left: 6px;
+        margin-bottom: 3px;
+        padding: 4.4px;
+        color: #c3c3c3;
+        font-size: 17px;
+        font-family: Teko;
+        font-weight: 500;
+        border-radius: 2px;
+        border: 1px solid #8f8f8f;
+        position: relative;
+        outline: 0;
+        -webkit-appearance: none;
+        -moz-appearance: none
+      }
+      .popup-form input::placeholder {
+        color: #fffbf7
+      }
+      .popup-form select {
+        background: #1a1b1c;
+        background-size: 100% 100%;
+        width: 90%;
+        height: auto;
+        margin-left: 6px;
+        margin-bottom: 3px;
+        padding: 6px;
+        padding-left: 6px;
+        color: #c3c3c3;
+        font-size: 17px;
+        font-family: Teko;
+        font-weight: 500;
+        border-radius: 2px;
+        border: 1px solid #8f8f8f;
+        position: relative;
+        outline: 0;
+        -webkit-appearance: none;
+        -moz-appearance: none
+      }
+
+      .popup.account_login .popup-box-bg {
+        padding-bottom: 20px !important;
+        height: auto !important;
+        min-height: 160px !important;
+      }
+
+      .overlay { z-index: 999999 !important; }
