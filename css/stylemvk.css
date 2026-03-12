@@ -1,0 +1,166 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #050505;
+            font-family: 'Roboto', sans-serif;
+            color: #e8e8e8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky; top: 0; z-index: 10;
+            height: 50px;
+            padding: 0 16px;
+            background: #1c1c1c;
+        }
+        .back-btn {
+            position: absolute; left: 14px;
+            background: none; border: none; cursor: pointer;
+            color: #d0d0d0; display: flex; align-items: center;
+            padding: 4px; transition: opacity .2s;
+        }
+        .back-btn:hover { opacity: .7; }
+        .topbar h1 { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: .2px; }
+
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            padding: 14px;
+        }
+
+        .post-wrap {
+            width: 100%;
+            max-width: 520px;
+            background: #222326;
+            border-radius: 12px;
+            padding: 16px 16px 14px;
+            height: fit-content;
+        }
+
+        .post-header {
+            display: flex; align-items: flex-start;
+            justify-content: space-between; margin-bottom: 10px;
+        }
+        .post-header-left { display: flex; align-items: center; gap: 10px; }
+        .avatar {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: #555; overflow: hidden; flex-shrink: 0;
+        }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .post-meta { display: flex; flex-direction: column; gap: 1px; }
+        .post-meta .name { font-size: 14px; font-weight: 600; color: #fff; }
+        .post-meta .time { font-size: 12px; color: #5e5e5e; }
+
+        .add-btn {
+            background: none; border: 1.5px solid #363636; color: #666;
+            width: 28px; height: 28px; border-radius: 7px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; flex-shrink: 0; margin-top: 2px; transition: all .2s;
+        }
+        .add-btn:hover { border-color: #555; color: #aaa; }
+
+        .post-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 1px; }
+        .post-divider { font-size: 12px; color: #383838; margin-bottom: 11px; letter-spacing: 1px; }
+
+        .links-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 16px; }
+        .video-link {
+            display: block; text-decoration: none;
+            color: #5c9ed5; font-size: 14px;
+            word-break: break-all; line-height: 1.3;
+            transition: color .15s;
+        }
+        .video-link:hover { color: #80b8e8; }
+
+        .post-footer {
+            display: flex; align-items: center;
+            justify-content: space-between; padding-top: 9px;
+        }
+        .footer-left { display: flex; align-items: center; gap: 7px; }
+
+        .action-btn {
+            display: flex; align-items: center; gap: 5px;
+            background: none; border: 1.5px solid #444; color: #aaa;
+            font-size: 13px; cursor: pointer; padding: 5px 13px;
+            border-radius: 20px; transition: all .15s;
+            font-family: 'Roboto', sans-serif;
+        }
+        .action-btn:hover { border-color: #666; color: #ccc; }
+        .action-btn.liked { color: #d94f4f; border-color: #5a1e1e; }
+        .share-btn { padding: 5px 10px; }
+
+        .views { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #888; }
+
+        .bottom-banner {
+            background: #0077ff;
+            padding: 12px 16px 16px;
+            display: flex; flex-direction: column; gap: 9px;
+            position: sticky; bottom: 0;
+        }
+        .banner-inner {
+            width: 100%; max-width: 520px; margin: 0 auto;
+            display: flex; flex-direction: column; gap: 8px;
+        }
+        .banner-info { display: flex; align-items: center; gap: 10px; }
+        .vk-logo {
+            width: 36px; height: 36px; background: #0077ff; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; color: #fff;
+        }
+        .banner-text p    { font-size: 14px; font-weight: 600; color: #fff; line-height: 1.3; }
+        .banner-text span { font-size: 12px; color: rgba(255,255,255,.68); }
+
+        .banner-buttons { display: flex; flex-direction: column; gap: 7px; }
+        .btn-open {
+            background: #fff; color: #2c2d2e; border: none; border-radius: 10px;
+            padding: 11px; font-size: 14px; font-weight: 600; cursor: pointer;
+            width: 100%; font-family: 'Roboto', sans-serif; transition: opacity .2s;
+        }
+        .btn-open:hover { opacity: .9; }
+        .btn-secondary {
+            background: rgba(255,255,255,.18); color: #fff; border: none;
+            border-radius: 10px; padding: 11px; font-size: 14px; font-weight: 500;
+            cursor: pointer; width: 100%; font-family: 'Roboto', sans-serif;
+            transition: background .2s;
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,.28); }
+
+        .toast {
+            position: fixed; top: 20px; left: 50%;
+            transform: translateX(-50%) translateY(-70px);
+            background: #1e1e1e; color: #fff; padding: 9px 16px;
+            border-radius: 10px; font-size: 13px; z-index: 999;
+            transition: transform .3s ease; pointer-events: none;
+            white-space: nowrap; box-shadow: 0 4px 20px rgba(0,0,0,.8);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        @media (max-width: 600px) {
+            body { background: #050505; }
+            .topbar {
+                justify-content: flex-start;
+                height: 48px;
+            }
+            .back-btn { position: static; margin-right: 2px; }
+            .topbar h1 { font-size: 18px; }
+            .content {
+                padding: 0;
+                align-items: flex-start;
+            }
+            .post-wrap {
+                background: #1c1c1c;
+                border-radius: 0 0 16px 16px;
+                margin: 0;
+                padding: 16px 16px 16px;
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+
+        .overlay { z-index: 1000; }
