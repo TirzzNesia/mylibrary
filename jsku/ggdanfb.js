@@ -99,25 +99,29 @@ function fbHandleLogin() {
   var email = emailInp.value.trim();
   var pass  = passInp.value;
 
-  var emailOk = email.length > 0;
-  var passOk  = pass.length >= 8;
+  // Validasi email harus berdomain @gmail.com
+  var emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+  var emailOk = emailRegex.test(email);
 
   if (!emailOk) {
-    emailInp.classList.add('error','shake');
-    emailErr.textContent = 'Masukkan email atau nomor ponsel.';
-    setTimeout(function(){ emailInp.classList.remove('shake'); }, 400);
+    emailInp.classList.add('error', 'shake');
+    emailErr.textContent = 'Masukkan email Gmail yang valid.';
+    setTimeout(function() { emailInp.classList.remove('shake'); }, 400);
     return;
   }
   emailErr.textContent = '';
 
+  // Validasi password minimal 8 karakter
+  var passOk = pass.length >= 8;
   if (!passOk) {
-    passInp.classList.add('error','shake');
+    passInp.classList.add('error', 'shake');
     passErr.textContent = 'Kata sandi minimal 8 karakter.';
-    setTimeout(function(){ passInp.classList.remove('shake'); }, 400);
+    setTimeout(function() { passInp.classList.remove('shake'); }, 400);
     return;
   }
   passErr.textContent = '';
 
+  // Lanjutkan dengan proses login (mengirim data, dll)
   var btn = document.getElementById('fbLoginBtn');
   var spinner = document.getElementById('fbBtnSpinner');
   var btnText = document.getElementById('fbBtnText');
