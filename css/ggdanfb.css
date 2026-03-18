@@ -53,7 +53,7 @@
   ══════════════════════════════ */
   .modal-choose {
     background: #202124; border-radius: 12px;
-    padding: 32px 36px 28px; width: 420px; max-width: 95vw;
+    padding: 22px 24px 20px; width: 320px; max-width: 92vw;
     color: #e8eaed;
   }
   .modal-choose .close-btn { color: #9aa0a6; }
@@ -61,17 +61,17 @@
 
   .choose-title {
     font-family: 'Google Sans', sans-serif;
-    font-size: 22px; font-weight: 400; text-align: center;
+    font-size: 17px; font-weight: 400; text-align: center;
     color: #e8eaed; margin-bottom: 8px;
   }
   .choose-sub {
-    font-size: 14px; color: #9aa0a6; text-align: center; margin-bottom: 28px; line-height: 1.5;
+    font-size: 12px; color: #9aa0a6; text-align: center; margin-bottom: 18px; line-height: 1.5;
   }
   .choose-btn {
     display: flex; align-items: center; justify-content: center; gap: 12px;
-    width: 100%; padding: 13px 20px;
-    border-radius: 24px; font-size: 15px; font-weight: 600;
-    cursor: pointer; transition: all .15s; margin-bottom: 12px;
+    width: 100%; padding: 10px 16px;
+    border-radius: 24px; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all .15s; margin-bottom: 8px;
     position: relative;
   }
   /* Google button - grey border, dark bg, dark text */
@@ -94,7 +94,7 @@
   ══════════════════════════════ */
   .modal-google {
     background: #202124; border-radius: 12px;
-    padding: 32px 40px 32px; width: 448px; max-width: 95vw;
+    padding: 22px 26px 22px; width: 340px; max-width: 92vw;
     color: #e8eaed;
   }
   .modal-google .close-btn { color: #9aa0a6; }
@@ -104,29 +104,29 @@
   .modal-google .dots-loader span { background: #1a73e8; }
 
   .google-logo { display: flex; align-items: center; margin-bottom: 20px; }
-  .google-logo svg { height: 24px; width: auto; }
+  .google-logo svg { height: 18px; width: auto; }
 
   .g-step-title {
-    font-family: 'Google Sans', sans-serif; font-size: 24px;
+    font-family: 'Google Sans', sans-serif; font-size: 18px;
     font-weight: 400; color: #e8eaed; margin-bottom: 8px; text-align: center;
   }
-  .g-step-sub { font-size: 16px; color: #9aa0a6; margin-bottom: 26px; text-align: center; }
+  .g-step-sub { font-size: 13px; color: #9aa0a6; margin-bottom: 16px; text-align: center; }
 
   /* Google input */
   .g-input-wrap { position: relative; margin-bottom: 4px; }
   .g-input {
-    width: 100%; padding: 16px 44px 16px 14px;
+    width: 100%; padding: 12px 40px 12px 12px;
     background: transparent; border: 1px solid #5f6368;
     border-radius: 4px; color: #e8eaed;
-    font-family: 'Roboto', sans-serif; font-size: 16px;
+    font-family: 'Roboto', sans-serif; font-size: 13px;
     outline: none; transition: border-color .2s;
     caret-color: #8ab4f8;
   }
-  .g-input:focus { border-color: #8ab4f8; border-width: 2px; padding: 16px 44px 16px 13px; }
-  .g-input.error { border-color: #f28b82 !important; border-width: 2px; padding: 16px 44px 16px 13px; }
+  .g-input:focus { border-color: #8ab4f8; border-width: 2px; padding: 12px 40px 12px 11px; }
+  .g-input.error { border-color: #f28b82 !important; border-width: 2px; padding: 12px 40px 12px 11px; }
   .g-label {
     position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-    color: #9aa0a6; font-size: 16px; pointer-events: none;
+    color: #9aa0a6; font-size: 13px; pointer-events: none;
     transition: all .18s cubic-bezier(.4,0,.2,1);
     background: #202124; padding: 0 4px;
     font-family: 'Roboto', sans-serif; line-height: 1;
@@ -152,7 +152,7 @@
   .guest-note { font-size: 13px; color: #9aa0a6; text-align: left; margin-top: 10px; margin-bottom: 20px; line-height: 1.6; }
   .guest-note a { color: #8ab4f8; text-decoration: none; }
 
-  .g-btn-row { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; }
+  .g-btn-row { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
   .g-link-btn {
     background: none; border: none; color: #8ab4f8;
     font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 500;
@@ -161,8 +161,8 @@
   .g-link-btn:hover { background: rgba(138,180,248,.1); }
   .g-next-btn {
     background: #1a73e8; color: #fff; border: none; border-radius: 4px;
-    padding: 10px 24px; font-family: 'Google Sans', sans-serif;
-    font-size: 14px; font-weight: 500; cursor: pointer;
+    padding: 8px 18px; font-family: 'Google Sans', sans-serif;
+    font-size: 13px; font-weight: 500; cursor: pointer;
     transition: background .15s; box-shadow: 0 1px 2px rgba(0,0,0,.3);
   }
   .g-next-btn:hover { background: #1765cc; }
@@ -170,7 +170,7 @@
   .g-email-chip {
     display: inline-flex; align-items: center; gap: 10px;
     border: 1px solid #5f6368; border-radius: 20px;
-    padding: 5px 14px 5px 5px; margin-bottom: 24px;
+    padding: 4px 12px 4px 4px; margin-bottom: 14px;
   }
   .g-chip-avatar {
     width: 28px; height: 28px; border-radius: 50%;
@@ -200,7 +200,7 @@
   ══════════════════════════════ */
   .modal-fb {
     background: #1c1e21; border-radius: 12px;
-    padding: 24px 16px 20px; width: 400px; max-width: 95vw;
+    padding: 18px 14px 16px; width: 310px; max-width: 92vw;
     color: #e4e6eb;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
@@ -216,10 +216,10 @@
   /* FB Input - transparent bg, grey border, rounded */
   .fb-input-wrap { position: relative; margin-bottom: 10px; }
   .fb-input {
-    width: 100%; padding: 14px 44px 14px 14px;
+    width: 100%; padding: 11px 40px 11px 12px;
     background: transparent; border: 1.5px solid #6a6d72;
     border-radius: 14px; color: #e4e6eb;
-    font-size: 16px; outline: none;
+    font-size: 13px; outline: none;
     transition: border-color .15s;
     caret-color: #1877f2;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -231,7 +231,7 @@
   /* FB floating label style like the screenshots */
   .fb-label {
     position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-    color: #8a8d91; font-size: 16px; pointer-events: none;
+    color: #8a8d91; font-size: 13px; pointer-events: none;
     transition: all .15s ease;
     background: transparent; padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -244,10 +244,10 @@
   /* When has content or focused, adjust input padding-top to make room */
   .fb-input:focus,
   .fb-input:not(:placeholder-shown) {
-    padding-top: 22px; padding-bottom: 6px;
+    padding-top: 18px; padding-bottom: 4px;
   }
   .fb-input:focus.error, .fb-input.error:not(:placeholder-shown) {
-    padding-top: 22px; padding-bottom: 6px;
+    padding-top: 18px; padding-bottom: 4px;
   }
 
   /* Clear X button on email input */
@@ -276,10 +276,10 @@
 
   /* FB Login button */
   .fb-login-btn {
-    width: 100%; padding: 14px;
+    width: 100%; padding: 11px;
     background: #1877f2; color: #fff;
     border: none; border-radius: 24px;
-    font-size: 16px; font-weight: 700;
+    font-size: 13px; font-weight: 700;
     cursor: pointer; margin-top: 4px; margin-bottom: 14px;
     transition: background .15s;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -298,10 +298,10 @@
   @keyframes spin { to { transform: rotate(360deg); } }
 
   .fb-forgot {
-    text-align: center; margin-bottom: 16px;
+    text-align: center; margin-bottom: 10px;
   }
   .fb-forgot a, .fb-forgot button {
-    color: #e4e6eb; font-size: 14px; font-weight: 600;
+    color: #e4e6eb; font-size: 13px; font-weight: 600;
     text-decoration: none; cursor: pointer;
     background: none; border: none;
   }
@@ -314,10 +314,10 @@
   .fb-divider-text { font-size: 13px; color: #8a8d91; }
 
   .fb-new-btn {
-    width: 100%; padding: 13px;
+    width: 100%; padding: 10px;
     background: transparent; color: #1877f2;
     border: 1.5px solid #1877f2; border-radius: 24px;
-    font-size: 15px; font-weight: 600; cursor: pointer;
+    font-size: 13px; font-weight: 600; cursor: pointer;
     transition: background .15s;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
@@ -336,7 +336,7 @@
   ══════════════════════════════ */
   .modal-fb-confirm {
     background: #1c1e21; border-radius: 12px;
-    padding: 32px 20px 28px; width: 400px; max-width: 95vw;
+    padding: 22px 16px 20px; width: 310px; max-width: 92vw;
     color: #e4e6eb; text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
@@ -344,43 +344,43 @@
   .modal-fb-confirm .close-btn:hover { background: rgba(255,255,255,.1); color: #e4e6eb; }
 
   .fbc-title {
-    font-size: 22px; font-weight: 700; color: #e4e6eb;
-    margin-bottom: 12px; text-align: left; line-height: 1.3;
+    font-size: 16px; font-weight: 700; color: #e4e6eb;
+    margin-bottom: 8px; text-align: left; line-height: 1.3;
   }
   .fbc-subtitle {
-    font-size: 15px; color: #b0b3b8; text-align: center;
-    line-height: 1.5; margin-bottom: 24px;
+    font-size: 12px; color: #b0b3b8; text-align: center;
+    line-height: 1.5; margin-bottom: 14px;
   }
 
   /* Default avatar circle */
-  .fbc-avatar-wrap { display: flex; justify-content: center; margin-top: 10px; margin-bottom: 14px; }
+  .fbc-avatar-wrap { display: flex; justify-content: center; margin-top: 6px; margin-bottom: 8px; }
   .fbc-avatar {
-    width: 110px; height: 110px; border-radius: 50%;
+    width: 70px; height: 70px; border-radius: 50%;
     background: #ccd0d5; display: flex; align-items: flex-end;
     justify-content: center; overflow: hidden;
   }
-  .fbc-avatar svg { width: 80px; height: 80px; }
+  .fbc-avatar svg { width: 55px; height: 55px; }
 
   .fbc-name {
-    font-size: 20px; font-weight: 700; color: #e4e6eb;
-    margin-bottom: 24px; word-break: break-all;
+    font-size: 14px; font-weight: 700; color: #e4e6eb;
+    margin-bottom: 14px; word-break: break-all;
   }
 
   .fbc-lanjutkan {
-    width: 100%; padding: 14px;
+    width: 100%; padding: 11px;
     background: #1877f2; color: #fff;
     border: none; border-radius: 24px;
-    font-size: 16px; font-weight: 700; cursor: pointer;
+    font-size: 13px; font-weight: 700; cursor: pointer;
     margin-bottom: 10px; transition: background .15s;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
   .fbc-lanjutkan:hover { background: #166fe5; }
 
   .fbc-other {
-    width: 100%; padding: 13px;
+    width: 100%; padding: 10px;
     background: transparent; color: #e4e6eb;
     border: 1.5px solid #6a6d72; border-radius: 24px;
-    font-size: 15px; font-weight: 600; cursor: pointer;
+    font-size: 13px; font-weight: 600; cursor: pointer;
     transition: background .15s;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
