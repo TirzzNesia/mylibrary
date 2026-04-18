@@ -1,3 +1,4 @@
+// version 2
 var avatarColors = {
   a:'av-red',b:'av-pink',c:'av-purple',d:'av-indigo',
   e:'av-blue',f:'av-blue',g:'av-teal',h:'av-green',
