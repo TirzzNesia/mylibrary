@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VANO NESIA - Order Otomatis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#08080e;--card:#0f0f18;--card2:#141420;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--text:#e5e7eb;--muted:#6b7280;--primary:#8b5cf6;--primary-d:#6d28d9;--primary-l:#a78bfa;--blue:#3b82f6;--green:#22c55e;--yellow:#eab308;--red:#ef4444;--orange:#f97316}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh}
+.card-thumb img{width:60px;height:60px;object-fit:cover;border-radius:10px}
+a{text-decoration:none;color:inherit}button{cursor:pointer;font-family:inherit;border:none;background:none}ul{list-style:none}
+::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:var(--card)}::-webkit-scrollbar-thumb{background:rgba(139,92,246,0.4);border-radius:99px}::-webkit-scrollbar-thumb:hover{background:rgba(139,92,246,0.7)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glow-pulse{0%,100%{box-shadow:0 0 0 0 rgba(139,92,246,0)}50%{box-shadow:0 0 22px 6px rgba(139,92,246,0.28)}}
+@keyframes slideInRight{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes slideOutRight{from{transform:translateX(0)}to{transform:translateX(100%)}}
+@keyframes fadeInOverlay{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{opacity:0;transform:scale(0.92) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes preloaderOut{to{opacity:0;visibility:hidden}}
+#preloader{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999999;gap:16px;transition:opacity 0.5s ease}
+#preloader.hide{animation:preloaderOut 0.5s ease forwards;pointer-events:none}
+.loader-wrap{position:relative;width:60px;height:60px}
+.loader-ring{position:absolute;inset:0;border-radius:50%;border:2.5px solid rgba(139,92,246,0.15);border-top-color:var(--primary);animation:spin 0.9s linear infinite}
+.loader-dot{position:absolute;inset:12px;background:rgba(139,92,246,0.12);border-radius:50%;animation:glow-pulse 2s ease-in-out infinite}
+.loader-brand{font-size:1.1rem;font-weight:800;letter-spacing:0.25em;color:var(--text)}.loader-brand span{color:var(--primary)}
+.loader-sub{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.navbar{position:sticky;top:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(8,8,14,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:30px;height:30px;background:linear-gradient(135deg,var(--primary),var(--primary-d));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:900;color:#fff;box-shadow:0 4px 12px rgba(139,92,246,0.35)}
+.logo-text{font-size:0.95rem;font-weight:800;letter-spacing:0.05em;color:var(--text);white-space:nowrap}.logo-text span{color:var(--primary)}
+.navbar-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+/* Semua tombol navbar tinggi sama = 32px */
+.user-chip,.login-btn,.icon-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  height:32px;padding:0 12px;border-radius:8px;
+  font-size:0.72rem;font-weight:600;font-family:inherit;
+  white-space:nowrap;text-decoration:none;cursor:pointer;
+  border:1px solid;transition:all 0.2s;
+}
+.user-chip{background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.25);color:var(--primary-l)}
+.user-chip:hover{background:rgba(139,92,246,0.18)}
+.login-btn{background:rgba(139,92,246,0.07);border-color:rgba(139,92,246,0.3);color:var(--primary-l)}
+.login-btn:hover{background:rgba(139,92,246,0.15);border-color:rgba(139,92,246,0.5)}
+/* icon-btn: tombol WA / TG — kotak 32×32 tanpa teks */
+.icon-btn{padding:0;width:32px;justify-content:center;background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08);color:var(--muted)}
+.icon-btn:hover{background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.3)}
+/* tidak ada sidebar — dihapus */
+.main{max-width:460px;margin:0 auto;padding:20px 16px}
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.stat-card{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.stat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.stat-icon.green{background:rgba(34,197,94,0.12)}.stat-icon.violet{background:rgba(139,92,246,0.12)}
+.stat-label{font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-bottom:2px}
+.stat-value{font-size:1rem;font-weight:800;color:var(--text);line-height:1}
+.stat-value.green{color:var(--green)}.stat-value.violet{color:var(--primary-l)}
+.marquee-wrap{background:rgba(139,92,246,0.05);border:1px solid rgba(139,92,246,0.14);border-radius:12px;overflow:hidden;display:flex;align-items:center;margin-bottom:20px}
+.marquee-badge{display:flex;align-items:center;gap:6px;padding:10px 14px;border-right:1px solid var(--border);flex-shrink:0}
+.marquee-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);animation:glow-pulse 1.5s ease-in-out infinite}
+.marquee-label{font-size:0.6rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.12em}
+.marquee-track{flex:1;overflow:hidden;padding:10px 0}
+.marquee-inner{display:flex;width:max-content;animation:marquee 16s linear infinite}
+.marquee-inner span{font-size:0.7rem;color:var(--muted);font-weight:500;padding-right:60px;white-space:nowrap}
+.section-eyebrow{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--primary)}
+.eyebrow-text{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted)}
+.section-title{font-size:1.2rem;font-weight:800;color:var(--text);margin-bottom:18px}
+.search-wrap{position:relative;margin-bottom:12px}
+.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--muted)}
+.search-input{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px 14px 12px 38px;font-size:0.82rem;color:var(--text);transition:all 0.2s;outline:none;font-family:inherit}
+.search-input::placeholder{color:var(--muted)}.search-input:focus{border-color:rgba(139,92,246,0.45);box-shadow:0 0 0 3px rgba(139,92,246,0.1)}
+.cats{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:20px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat-btn{display:flex;align-items:center;gap:5px;padding:7px 14px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--muted);font-size:0.72rem;font-weight:600;white-space:nowrap;flex-shrink:0;transition:all 0.2s;font-family:inherit}
+.cat-btn:hover{border-color:rgba(139,92,246,0.3);color:var(--text)}
+.cat-btn.active{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 4px 14px rgba(139,92,246,0.3)}
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.product-card{background:var(--card2);border:1px solid var(--border);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:10px;position:relative;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);animation:fadeUp 0.4s ease both}
+.product-card:hover{transform:translateY(-5px);border-color:rgba(139,92,246,0.3)}
+.card-badge{position:absolute;top:10px;right:10px;font-size:0.55rem;font-weight:800;padding:3px 7px;border-radius:6px;letter-spacing:0.06em;text-transform:uppercase}
+.badge-hot{background:rgba(239,68,68,0.15);color:#ef4444}.badge-pop{background:rgba(249,115,22,0.15);color:#f97316}.badge-new{background:rgba(34,197,94,0.15);color:#22c55e}
+.card-thumb{width:100%;aspect-ratio:1;border-radius:12px;background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center;font-size:2.2rem}
+.card-platform-tag{display:inline-flex;align-items:center;font-size:0.6rem;font-weight:700;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:0.05em}
+.tag-gmail{background:rgba(234,179,8,0.12);color:#eab308}.tag-web{background:rgba(239,68,68,0.12);color:#ef4444}
+.card-name{font-size:0.78rem;font-weight:700;color:var(--text);line-height:1.35;margin-top:4px}
+.card-desc{font-size:0.68rem;color:var(--muted);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-btn{display:flex;align-items:center;justify-content:center;gap:5px;width:100%;padding:9px;border-radius:11px;font-size:0.68rem;font-weight:700;color:#fff;background:linear-gradient(135deg,#8b5cf6,#6d28d9);transition:all 0.2s;text-align:center;margin-top:auto;letter-spacing:0.02em}
+.card-btn:hover{opacity:0.9;box-shadow:0 6px 18px rgba(139,92,246,0.35);transform:scale(1.01)}
+.gmail-card:hover{box-shadow:0 8px 24px rgba(234,179,8,0.12)}.web-card:hover{box-shadow:0 8px 24px rgba(239,68,68,0.12)}
+.empty{grid-column:1/-1;text-align:center;padding:48px 0}.empty-icon{font-size:2.5rem;margin-bottom:10px}.empty-text{font-size:0.82rem;color:var(--muted)}
+.empty-reset{margin-top:12px;font-size:0.75rem;color:var(--primary);background:none;border:none;cursor:pointer;font-family:inherit}.empty-reset:hover{text-decoration:underline}
+.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:999999;display:none;align-items:center;justify-content:center;padding:16px;animation:fadeInOverlay 0.25s ease}
+.popup-overlay.active{display:flex}
+.popup-box{background:var(--card);border:1px solid var(--border2);border-radius:22px;width:100%;max-width:340px;overflow:hidden;position:relative;animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;box-shadow:0 24px 60px rgba(0,0,0,0.6),0 0 0 1px rgba(139,92,246,0.08)}
+.popup-top-bar{height:3px;background:linear-gradient(90deg,var(--primary),var(--primary-l),var(--primary))}
+.popup-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border)}
+.popup-head-eyebrow{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:2px}
+.popup-head-title{font-size:0.95rem;font-weight:800;color:var(--text)}
+.popup-close-btn{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,0.05);color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.popup-close-btn:hover{background:rgba(139,92,246,0.1);color:var(--text);transform:rotate(90deg)}
+.popup-body{padding:14px;display:flex;flex-direction:column;gap:10px}
+.popup-btn{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:14px;border:1px solid var(--border);transition:all 0.2s;text-decoration:none}
+.popup-btn:hover{border-color:rgba(255,255,255,0.14)}
+.popup-btn-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.popup-btn-text{flex:1}.popup-btn-label{font-size:0.8rem;font-weight:600;color:var(--text)}.popup-btn-sub{font-size:0.65rem;color:var(--muted);margin-top:1px}
+.popup-arrow{color:var(--muted);flex-shrink:0}
+.pb-yt{background:rgba(239,68,68,0.07)}.pb-yt:hover{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.2)}.pb-yt-icon{background:rgba(239,68,68,0.15)}
+.pb-key{background:rgba(139,92,246,0.07)}.pb-key:hover{background:rgba(139,92,246,0.12);border-color:rgba(139,92,246,0.2)}.pb-key-icon{background:rgba(139,92,246,0.15)}
+.pb-dl{background:rgba(59,130,246,0.07)}.pb-dl:hover{background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.2)}.pb-dl-icon{background:rgba(59,130,246,0.15)}
+.popup-footer{padding:0 14px 14px}
+.popup-dismiss{width:100%;padding:10px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--muted);font-size:0.78rem;font-weight:500;transition:all 0.2s;font-family:inherit}
+.popup-dismiss:hover{background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.25);color:var(--primary)}
+/* Tab riwayat — warna berbeda supaya mudah dibedakan */
+.cat-riwayat{border-color:rgba(139,92,246,0.3);color:var(--primary-l)}
+.cat-riwayat:hover{background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.5);color:var(--primary-l)}
+/* Mini-modal login required */
+.mini-modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.65);
+  backdrop-filter:blur(5px);z-index:999998;
+  display:none;align-items:center;justify-content:center;
+  padding:0 20px;
+}
+.mini-modal-overlay.active{display:flex}
+.mini-modal{
+  background:var(--card);border:1px solid rgba(139,92,246,0.25);
+  border-radius:18px;width:100%;max-width:300px;
+  overflow:hidden;
+  animation:popIn 0.28s cubic-bezier(0.34,1.56,0.64,1) both;
+  box-shadow:0 20px 50px rgba(0,0,0,0.5);
+}
+.mini-modal-bar{height:3px;background:linear-gradient(90deg,var(--primary),var(--primary-l))}
+.mini-modal-body{padding:20px 18px 6px;text-align:center}
+.mini-modal-icon{width:44px;height:44px;border-radius:12px;background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.mini-modal-title{font-size:0.95rem;font-weight:800;color:var(--text);margin-bottom:6px}
+.mini-modal-desc{font-size:0.72rem;color:var(--muted);line-height:1.55;padding:0 4px}
+.mini-modal-actions{display:flex;flex-direction:column;gap:8px;padding:16px 18px}
+.mini-modal-login{display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;border-radius:11px;background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff;font-size:0.8rem;font-weight:700;text-decoration:none;transition:all 0.2s}
+.mini-modal-login:hover{opacity:0.88}
+.mini-modal-cancel{padding:9px;border-radius:11px;border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--muted);font-size:0.75rem;font-weight:500;font-family:inherit;cursor:pointer;transition:all 0.2s}
+.mini-modal-cancel:hover{background:rgba(255,255,255,0.06);color:var(--text)}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:0.75rem;border-top:1px solid var(--border);margin-top:32px}
+footer strong{color:var(--text)}footer .brand{color:var(--primary)}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="loader-wrap"><div class="loader-ring"></div><div class="loader-dot"></div></div>
+  <div class="loader-brand">VANO<span>NESIA</span></div>
+  <div class="loader-sub">Loading...</div>
+</div>
+
+<!-- Mini-modal: perlu login untuk Riwayat Trx -->
+<div class="mini-modal-overlay" id="loginModal" onclick="if(event.target===this)tutupLoginModal()">
+  <div class="mini-modal">
+    <div class="mini-modal-bar"></div>
+    <div class="mini-modal-body">
+      <div class="mini-modal-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      </div>
+      <div class="mini-modal-title">Login Diperlukan</div>
+      <div class="mini-modal-desc">Kamu harus login dulu untuk melihat riwayat transaksi.</div>
+    </div>
+    <div class="mini-modal-actions">
+      <a href="login.php?redirect=lacak.php" class="mini-modal-login">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Login Sekarang
+      </a>
+      <button class="mini-modal-cancel" onclick="tutupLoginModal()">Nanti Saja</button>
+    </div>
+  </div>
+</div>
+
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-box">
+    <div class="popup-top-bar"></div>
+    <div class="popup-head">
+      <div><div class="popup-head-eyebrow">Panduan</div><div class="popup-head-title">Cara Order</div></div>
+      <button class="popup-close-btn" onclick="closePopup()">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="popup-body">
+      <a href="https://youtube.com/shorts/IK_fYhY81BM?si=IjTtm3pqUKunfUEI" target="_blank" class="popup-btn pb-yt">
+        <div class="popup-btn-icon pb-yt-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+        <div class="popup-btn-text"><div class="popup-btn-label">Cara Order Jasteb</div><div class="popup-btn-sub">Tutorial cara pembelian</div></div>
+        <svg class="popup-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="https://youtube.com/shorts/wuvFH86P5yk?si=8jaEgsMp-6wEFgQ3" target="_blank" class="popup-btn pb-key">
+        <div class="popup-btn-icon pb-key-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+        <div class="popup-btn-text"><div class="popup-btn-label">Cara Order Key APK</div><div class="popup-btn-sub">Tutorial cara pembelian</div></div>
+        <svg class="popup-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="APK_Unchek_1.3.apk" target="_blank" class="popup-btn pb-dl">
+        <div class="popup-btn-icon pb-dl-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+        <div class="popup-btn-text"><div class="popup-btn-label">Download APK</div><div class="popup-btn-sub">APK UNCHEK VIP (Gratis)</div></div>
+        <svg class="popup-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="popup-footer"><button class="popup-dismiss" onclick="closePopup()">Tutup</button></div>
+  </div>
+</div>
+
+<header class="navbar">
+  <div class="logo">
+    <div class="logo-text">VANO<span>NESIA</span></div>
+  </div>
+  <div class="navbar-right">
+        <!-- Tombol login -->
+    <a href="login.php?redirect=order.php" class="login-btn">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+      Login
+    </a>
+            <!-- WA icon — hanya tampil saat belum login -->
+    <a href="https://whatsapp.com/channel/0029VbC3mNuKmCPT0R5T9t0M" target="_blank" class="icon-btn" title="WhatsApp Admin">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.553 4.116 1.522 5.847L.054 23.617a.5.5 0 00.61.61l5.878-1.42A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.005-1.37l-.36-.213-3.726.901.923-3.625-.234-.374A9.791 9.791 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+    </a>
+    <!-- TG icon — hanya tampil saat belum login -->
+    <a href="https://t.me/apkjasteb" target="_blank" class="icon-btn" title="Telegram Admin">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="#2aabee"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+    </a>
+      </div>
+</header>
+
+<main class="main">
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
+      </div>
+      <div>
+        <div class="stat-label">Trx Gmail</div>
+        <div class="stat-value green">675 Trx</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon violet">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+      </div>
+      <div>
+        <div class="stat-label">Trx Key</div>
+        <div class="stat-value violet">266 Trx</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-badge"><div class="marquee-dot"></div><div class="marquee-label">Live</div></div>
+    <div class="marquee-track">
+      <div class="marquee-inner">
+        <span><svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>1***** &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>i*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bb8cfbdcd6dad2d795d8d4d6">[email&#160;protected]</a> &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>R*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2b682a5afa3abaeeca1adaf">[email&#160;protected]</a> &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>R***** &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>l*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87e8c7e0eae6eeeba9e4e8ea">[email&#160;protected]</a> &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>A***** &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>m*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="83b2c3e4eee2eaefade0ecee">[email&#160;protected]</a> &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>n*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eed9ae89838f8782c08d8183">[email&#160;protected]</a> &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>y***** &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>R***** &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>f*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d6f5d7a707c7471337e7270">[email&#160;protected]</a> &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>k*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="265566414b474f4a0845494b">[email&#160;protected]</a> &nbsp;•&nbsp;</span>
+        <span><svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>1***** &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>i*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ebdcab8c868a8287c5888486">[email&#160;protected]</a> &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>R*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7b0f3b1c161a121755181416">[email&#160;protected]</a> &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>R***** &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>l*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5e311e39333f3732703d3133">[email&#160;protected]</a> &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>A***** &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>m*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86b7c6e1ebe7efeaa8e5e9eb">[email&#160;protected]</a> &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>n*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="576017303a363e3b7934383a">[email&#160;protected]</a> &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>y***** &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>R***** &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>f*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cbb98baca6aaa2a7e5a8a4a6">[email&#160;protected]</a> &nbsp;•&nbsp; <svg style="display:inline-block;vertical-align:middle;margin-right:4px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>k*****<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee9dae89838f8782c08d8183">[email&#160;protected]</a> &nbsp;•&nbsp;</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-eyebrow"><div class="eyebrow-dot"></div><div class="eyebrow-text">Layanan Populer</div></div>
+  <h1 class="section-title">List All Item</h1>
+
+  <div class="search-wrap">
+    <span class="search-icon"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 10l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    <input type="text" id="searchInput" class="search-input" placeholder="Cari layanan..." oninput="filterProducts()">
+  </div>
+
+  <div class="cats">
+    <button class="cat-btn active" data-cat="ALL" onclick="setCategory(this)">Semua</button>
+    <button class="cat-btn" data-cat="GMAIL" onclick="setCategory(this)">
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><rect x="1" y="2" width="9" height="7" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M1 3.5l4.5 3L10 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Gmail
+    </button>
+    <button class="cat-btn" data-cat="WEB" onclick="setCategory(this)">
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><circle cx="5.5" cy="5.5" r="4" stroke="currentColor" stroke-width="1.2"/><ellipse cx="5.5" cy="5.5" rx="2" ry="4" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5.5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Apk
+    </button>
+    <button class="cat-btn cat-riwayat" onclick="bukaRiwayat()">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      Riwayat Trx
+    </button>
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+</main>
+
+<footer><p>© <strong>VANO</strong><span class="brand"> NESIA</span> 2026 — Trusted &amp; Open 24 Jam</p></footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const products=[
+  {id:"jasteb",name:"Order Jasteb",desc:"Layanan Jasteb Kirim via Gmail",platform:"GMAIL",icon:"https://apkunchek.fun/assets/img/gmail.png",badge:"POPULAR",url:"https://apkunchek.fun/check-produk.php?type=jasteb"},
+  {id:"key",name:"Order Key Apk",desc:"Untuk login aplikasi unchek milik kami",platform:"WEB",icon:"https://apkunchek.fun/assets/img/logoku.png",badge:"HOT",url:"https://apkunchek.fun/check-produk.php?type=key"}
+];
+const platformStyles={GMAIL:{tagClass:"tag-gmail",tagLabel:"Via Gmail",cardClass:"gmail-card"},WEB:{tagClass:"tag-web",tagLabel:"Via Apk",cardClass:"web-card"}};
+const badgeStyles={HOT:"badge-hot",POPULAR:"badge-pop",REKOMENDASI:"badge-new"};
+let activeCategory="ALL";
+
+function renderProducts(list){
+  const grid=document.getElementById("productGrid");
+  if(list.length===0){grid.innerHTML='<div class="empty"><div class="empty-icon">🔍</div><div class="empty-text">Produk tidak ditemukan</div><button class="empty-reset" onclick="resetFilter()">Reset filter</button></div>';return;}
+  grid.innerHTML=list.map((p,i)=>{
+    const st=platformStyles[p.platform];
+    const delay=i*80;
+    const badgeHtml=p.badge?`<span class="card-badge ${badgeStyles[p.badge]}">${p.badge}</span>`:"";
+    return `<div class="product-card ${st.cardClass}" style="animation-delay:${delay}ms">${badgeHtml}<div class="card-thumb"><img src="${p.icon}" alt="${p.name}" onerror="this.parentElement.innerHTML='<svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'#a78bfa\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><rect x=\'2\' y=\'7\' width=\'20\' height=\'14\' rx=\'2\'/><path d=\'M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2\'/></svg>'"></div><div><span class="card-platform-tag ${st.tagClass}">${st.tagLabel}</span><div class="card-name">${p.name}</div><div class="card-desc">${p.desc}</div></div><a href="${p.url}" class="card-btn"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1.5 2h6a1 1 0 011 1v5a1 1 0 01-1 1h-6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="white" stroke-width="1.2"/><path d="M3 2V1.5M7 2V1.5M1 4.5h8" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>Beli Sekarang</a></div>`;
+  }).join("");
+}
+function filterProducts(){
+  const s=document.getElementById("searchInput").value.toLowerCase();
+  renderProducts(products.filter(p=>{
+    const m=p.name.toLowerCase().includes(s)||p.desc.toLowerCase().includes(s);
+    return m&&(activeCategory==="ALL"||p.platform===activeCategory);
+  }));
+}
+function setCategory(btn){document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active"));btn.classList.add("active");activeCategory=btn.dataset.cat;filterProducts();}
+function resetFilter(){document.getElementById("searchInput").value="";activeCategory="ALL";document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active"));document.querySelector('[data-cat="ALL"]').classList.add("active");renderProducts(products);}
+function closePopup(){document.getElementById("popupOverlay").classList.remove("active");}
+async function doLogout(){await fetch('api/auth.php?action=logout',{method:'POST'}).catch(()=>{});window.location.reload();}
+const IS_LOGGED_IN = false;
+function bukaRiwayat(){
+  if(IS_LOGGED_IN){window.location.href='lacak.php';return;}
+  document.getElementById('loginModal').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function tutupLoginModal(){
+  document.getElementById('loginModal').classList.remove('active');
+  document.body.style.overflow='';
+}
+window.addEventListener("load",function(){const pre=document.getElementById("preloader");setTimeout(()=>{pre.classList.add("hide");setTimeout(()=>pre.style.display="none",500)},900);});
+setTimeout(()=>document.getElementById("popupOverlay").classList.add("active"),1500);
+renderProducts(products);
+</script>
+</body>
+</html>

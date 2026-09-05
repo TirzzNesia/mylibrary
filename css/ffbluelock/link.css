@@ -1,0 +1,320 @@
+.popup-link {
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:9999;
+	background-color:rgba(0, 0, 0, 0.5);
+}
+.link-box {
+	width: 390px;
+	height: auto;
+	position: relative;
+	margin: 50px auto;
+	margin-top: 15%;
+	text-align: left;
+	font-family:'laza';
+	color:#fff;
+}
+.link-box-navbar {
+	background:url(../img/link-navbar.png) no-repeat center center;
+	background-size:100% 100%;
+	height: 43px;
+	padding-bottom: 0px;	
+}
+.link-box-navbar img {
+	width: 18px;
+	height: 18px;
+	margin-top: 13px;
+	margin-right: 15px;
+	float: right;
+}	
+.link-box-navbar-title {	
+	padding-top: 10px;
+	padding-bottom: 2px;
+	font-size: 19px;
+	font-family:laza;
+	font-weight: 300;
+	margin-left: 17px;	
+	text-align: left;	
+	color: #fff;
+}
+.link-box-bg {
+	background:url(../img/link-box-bg.png) no-repeat center center;
+	background-size:100% 100%;
+	width: 100%;
+	margin-top: -12px;
+	border-top:0px solid #fff;
+}	
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.link-box-bg {
+  --angle: 360deg;
+  border-image: linear-gradient(var(--angle), #4B331A, #FFEFC1, #E7D6A8, #EEC97B) 1;
+  animation: 1s rotate linear infinite;
+}
+@keyframes rotate {
+  to {
+    --angle: 0deg;
+  }
+}		
+.link-box-alert {
+	width: 95%;
+	height: auto;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	padding: 5px;
+	color: #fff;
+	font-size: 20px;
+    font-family: laza;
+	font-weight: 500;
+	text-align: left;
+	display: block;
+}
+.link-box-alert i {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	color: #F5EAB0;
+	font-size: 50px;
+	text-align: left;
+}
+.link-box-bg label {
+  width: 70%;
+  text-align: left;
+  padding-left: 20px;
+  margin-bottom: 2px;
+  font-family:laza;
+  color: #fff;
+  text-shadow:none;
+  font-size:17px;
+  display:inline-block;
+}
+.link-box-form input {
+	background: #001;
+	width: 90%;
+	height: 35px;
+	margin-bottom: 8px;
+	margin-left: 20px;
+	padding-right: 4px;
+	padding: 4px;
+	color: #fff;
+	font-size:15px;
+	font-family: laza;
+	font-weight: 500;
+	border: 0.1px solid #fff;
+	outline:none;
+	position: left;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.link-box-form input::placeholder {
+	color: #BCCBCE;
+}
+.link-box-form-login {
+	background: #001;
+	width: 86%;
+	height: 35px;
+	margin-bottom: 8px;
+	margin-left: 20px;
+	padding-right: 4px;
+	padding: 4px;
+	color: #fff;
+	font-size:15px;
+	font-family: laza;
+	font-weight: 500;
+	border: 0.1px solid #fff;
+	outline:none;
+	position: left;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.link-box-form-code {
+	background: #001;
+	width: 40%;
+	height: 35px;
+	margin-bottom: 8px;
+	margin-left: 20px;
+	padding-right: 4px;
+	padding: 4px;
+	color: #fff;
+	font-size:15px;
+	font-family: laza;
+	font-weight: 500;
+	border: 0.1px solid #fff;
+	outline:none;
+	position: left;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.link-box-form-code input::placeholder {
+	color: #BCCBCE;
+}
+.link-box-form-region {
+	background: #001;
+	width: 27%;
+	height: 35px;
+	margin-bottom: 8px;
+	margin-left: 20px;
+	padding-right: 4px;
+	padding: 4px;
+	color: #fff;
+	font-size:15px;
+	font-family: laza;
+	font-weight: 500;
+	border: 0.1px solid #fff;
+	text-align:left;
+	outline:none;
+	display: inline-block;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+}
+.link-box-form-region input::placeholder {
+	color: #BCCBCE;
+}
+.link-box-form-number {
+	background: #001;
+	width: 56.7%;
+	height: 35px;
+	margin-bottom: 8px;
+	margin-left: 5px;
+	padding-right: 4px;
+	padding: 4px;
+	color: #fff;
+	font-size:15px;
+	font-family: laza;
+	font-weight: 500;
+	border: 0.1px solid #fff;
+	outline:none;
+	position: left;
+	display: inline-block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.link-box-form-number input::placeholder {
+	color: #BCCBCE;
+}
+.link-code-btn {
+	background: #2F3E41;
+	background-size: 100% 100%;
+	width: 30%;
+	height: 36px;
+	padding-top: 1.5px;
+	margin-left: 15px;	
+	border: 1px solid #BAE9E3;
+	color: #BAE9E3;
+	font-size:16px;
+	font-family: laza;
+	font-weight: 300;
+	text-align: center;	
+	outline: none;
+}
+.link-box-footer {
+	background-size:100% 100%;
+	margin-top: 20px;
+	width: 100%;
+	height: 45px;
+}
+.link-box-footer button {
+	background:url(../img/yes_laza.png) no-repeat center;
+	background-size: 100% 100%;
+	width: 30%;
+	height: 35px;
+	margin-top: -5px;
+	margin-bottom: 5px;
+	padding: 4px;
+	padding-left: 35px;
+	padding-right: 35px;
+	color: #000;
+	font-size:18px;
+	font-family: laza;
+	font-weight: 500;
+	text-align: center;
+	border: none;
+	outline: none;
+}
+.link-wrapper-border {
+	height: 11px;	
+}
+.link-wrapper {
+	width: 68.3%;
+	height: auto;	
+	margin-right: auto;
+	display: block;
+	margin-left:21px;
+}
+.link-content {
+	background: #303030;
+	background-size:100% 100%;
+	width: 40%;
+	height: 30px;
+	margin: -2px;
+	color: #fff;
+	border: 0.5px solid #fff;	
+	display: inline-block;
+	padding: 5px;
+	font-size: 14px;
+	font-family: laza;
+	font-weight: 300;
+	text-align: center;
+	text-shadow: none;
+}
+.link-content-active {
+	background: #2F3E41;
+	background-size:100% 100%;
+	border: 0.5px solid #BAE9E3;
+	color: #BAE9E3;
+	padding: 5px;
+	font-size: 14px;
+	font-family: laza;
+	font-weight: 300;
+	text-align: center;
+	text-shadow: none;
+}
+.kagetk {     
+	background: rgba(0, 0, 0, 0.2);
+	background-size:50% 50%;
+	width: 80%;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #fff;
+	display: none;
+	padding: 10px;
+	color: #fff;
+	font-size: 14px;
+	font-family: laza;
+	text-align: center;
+}
+.load-login-imgs {
+	width:30%;
+	height:auto;
+	margin-top:30px;
+	margin-bottom:5px;
+}
+.load-login-img {
+	width:10%;
+	height:auto;
+	margin-top:30px;
+	margin-bottom:5px;
+	animation: mymoves 1s infinite linear;
+}
+@keyframes mymoves {  
+  100% {transform: rotate(360deg);
+  }
+}
+.load-login-gif {
+	width:15%;
+	height:auto;
+	margin-bottom:0px;
+}
+.load-login-text {	
+	color: #f2f2f2;
+	font-size: 13px;
+    font-family: Sans-serif, Arial;
+}
