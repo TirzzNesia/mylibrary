@@ -618,7 +618,7 @@
          padding-top: 30px;
          }
          .loginpop {
-         background: url(https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/ffrushboardv2/lazlogin.png) no-repeat center center;
+         background: url(https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/loadlogin.png) no-repeat center center;
          background-size: 100% 100%;
          width: 400px;
          height: 200px;
@@ -1039,7 +1039,7 @@
          margin-top: -10px
          }
          .popup-box-bg-login-load {
-         background: url(https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/ffrushboardv2/lazlogin.png) no-repeat center center;
+         background: url(https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/loadlogin.png) no-repeat center center;
          background-size: 100% 100%;
          margin-left: -20px;
          width: 400px;
@@ -2158,7 +2158,7 @@
          padding-top: 1px;
          }
          .rewardpop {
-         background: url(https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/ffrushboardv2/lazlogin.png) no-repeat center center;
+         background: url(https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/loadlogin.png) no-repeat center center;
          background-size: 100% 100%;
          width: 400px;
          height: 200px;
@@ -9290,7 +9290,7 @@ svg {
    display: none;
 }
 .loginpop {
-   background: url(https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/ffrushboardv2/lazlogin.png) no-repeat center center !important;
+   background: url(https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/loadlogin.png) no-repeat center center !important;
    background-size: 100% 100% !important;
    width: 440px !important;
    max-width: 96vw !important;
