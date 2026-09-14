@@ -1,0 +1,406 @@
+@charset "utf-8";
+
+/* --- GABUNGAN CSS LENGKAP FFXGINTAMAV2 --- */
+
+@font-face {
+  font-family: 'laza';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/laza.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'laza3';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/laza-latin.otf") format('opentype');
+}
+@font-face {
+  font-family: 'laza2';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/laza.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'laza4';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/laza-latin.otf") format('opentype');
+}
+@font-face {
+  font-family: 'lazaFixed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/laza.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lazaLatinFixed';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/laza-latin.otf") format('opentype');
+}
+
+.TrueID .popup-box-wrapperz,
+.account_verification .popup-box-wrapperz,
+.check_verification .popup-box-wrapperz,
+.processing_account .popup-box-wrapperz {
+  width: min(390px, calc(100vw - 30px));
+}
+
+.laz-container {
+  background: url('https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/ffxgintamav2/utama/bg.jpg') no-repeat top center !important;
+  background-size: 100% 100% !important;
+}
+
+.TrueID .popup-box-navbarz,
+.account_verification .popup-box-navbarz,
+.check_verification .popup-box-navbarz,
+.processing_account .popup-box-navbarz {
+  background: url('https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/popup-navbar2.png') no-repeat center center !important;
+  background-size: 100% 100% !important;
+  height: 43px;
+  padding-bottom: 5px;
+}
+
+.TrueID .popup-box-bgz,
+.account_verification .popup-box-bgz,
+.check_verification .popup-box-bgx,
+.processing_account .popup-box-bgz {
+  background: url('https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/popup-box-bg3.png') no-repeat center center !important;
+  background-size: 100% 100% !important;
+  min-height: 185px;
+  padding: 16px 0 18px;
+  box-sizing: border-box;
+}
+
+.TrueID .popup-box-navbar-title,
+.account_verification .popup-box-navbar-title,
+.check_verification .popup-box-navbar-title,
+.processing_account .popup-box-navbar-title {
+  padding-top: 9px;
+  padding-bottom: 2px;
+  font-size: 20px;
+  font-family: laza, Teko, sans-serif;
+  font-weight: 700;
+  text-align: left;
+  color: #000;
+  padding-left: 16px;
+}
+
+.TrueID .popup-box-form-footer button,
+.account_verification .popup-box-form-footer button,
+.popup-box-footer button {
+  background: url('https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/button.png') no-repeat center center !important;
+  background-size: 100% 100% !important;
+  min-width: 104px;
+  height: 33px;
+  padding: 4px 28px;
+  color: #000;
+  font-size: 18px;
+  font-family: laza3, Teko, sans-serif;
+  font-weight: 700;
+  text-align: center;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+.itemReward_confirmation2 .popup-box-navbar-lz,
+.itemReward_confirmationsold .popup-box-navbar-lz {
+  background: url('https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/ffxgintamav2/utama/popup-navbar3.png') no-repeat center center !important;
+  background-size: 100% 100% !important;
+  height: 43px;
+  padding-bottom: 5px;
+}
+
+.itemReward_confirmation2 .popup-box-lz,
+.itemReward_confirmationsold .popup-box-lz {
+  background: url('https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/popup-box-bg3.png') no-repeat center center !important;
+  background-size: 100% 100% !important;
+  min-height: 265px;
+  padding: 18px 0 22px;
+  box-sizing: border-box;
+}
+
+.itemReward_confirmation2 .popup-box-navbar-lz-title,
+.itemReward_confirmationsold .popup-box-navbar-lz-title {
+  padding-top: 9px;
+  padding-left: 15px;
+  font-size: 20px;
+  font-family: laza, Teko, sans-serif;
+  font-weight: 700;
+  text-align: left;
+  color: #111;
+}
+
+.itemReward_confirmation2 .popup-box-footer-lz button,
+.itemReward_confirmationsold .popup-box-footer-lz button {
+  background: url('https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/button.png') no-repeat center center !important;
+  background-size: 100% 100% !important;
+  min-width: 118px;
+  height: 34px;
+  padding: 4px 30px;
+  color: #000;
+  font-size: 18px;
+  font-family: laza3, Teko, sans-serif;
+  font-weight: 700;
+  text-align: center;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+body, div, span, p, button, input, select, option, h1, h2, h3, h4, h5, h6, a, label, pr, prs, rw, g {
+  font-family: 'lazaLatinFixed', Teko, Arial, sans-serif !important;
+}
+
+.section-title-text,
+.popup-box-navbar-title,
+.popup-box-navbar-lz-title,
+.popup-box-form-footer button,
+.popup-box-footer button,
+.popup-box-footer-lz button,
+.purchase-button {
+  font-family: 'lazaFixed', 'lazaLatinFixed', Teko, Arial, sans-serif !important;
+}
+
+/* Balanced & Polished Button Styling */
+.btn-lupa-id {
+  background: #252830 !important;
+  border: 1px solid #4a5568 !important;
+  color: #e2e8f0 !important;
+  font-family: 'laza', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  height: 35px !important;
+  line-height: 35px !important;
+  padding: 0 16px !important;
+  border-radius: 6px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s ease !important;
+}
+.btn-lupa-id:hover {
+  background: #374151 !important;
+  border-color: #64748b !important;
+  color: #ffffff !important;
+}
+.btn-lupa-id i,
+.btn-lupa-id [class*="fa-"] {
+  font-size: 13px !important;
+  font-family: 'Font Awesome 6 Free', FontAwesome !important;
+  font-weight: 900 !important;
+  display: inline-block !important;
+}
+
+.btn-cek-id {
+  background: url(https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/img/button.png) no-repeat center !important;
+  background-size: 100% 100% !important;
+  color: #000000 !important;
+  border: none !important;
+  font-family: 'laza', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  height: 35px !important;
+  line-height: 35px !important;
+  padding: 0 20px !important;
+  border-radius: 6px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+  box-sizing: border-box !important;
+  transition: opacity 0.2s ease !important;
+}
+.btn-cek-id:hover {
+  opacity: 0.9 !important;
+}
+.btn-cek-id i,
+.btn-cek-id [class*="fa-"] {
+  font-size: 13px !important;
+  font-family: 'Font Awesome 6 Free', FontAwesome !important;
+  font-weight: 900 !important;
+  display: inline-block !important;
+}
+
+/* === Uniform item card image sizing === */
+.character-image-container {
+  height: 90px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+.character-image-container img.character-image {
+  max-height: 85px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+}
+
+/* === FIXED VIEWPORT: only items area scrolls === */
+html, body {
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.slider-container { flex-shrink: 0 !important; }
+.header { flex-shrink: 0 !important; }
+.laz-home {
+  flex: 1 !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+.laz-container {
+  flex: 1 !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  height: auto !important;
+}
+.slidezs { flex-shrink: 0 !important; }
+.section-title { flex-shrink: 0 !important; }
+.timer { flex-shrink: 0 !important; }
+.box-rewards {
+  flex: 1 !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding-bottom: 8px !important;
+}
+.box-rewards::-webkit-scrollbar { width: 4px; }
+.box-rewards::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 4px; }
+.box-rewards::-webkit-scrollbar-thumb { background: rgba(255,186,0,0.5); border-radius: 4px; }
+.box-rewards::-webkit-scrollbar-thumb:hover { background: rgba(255,186,0,0.8); }
+
+/* === POPUP LOGIN & LOAD OVERLAY === */
+html body .popup.account_login:not(.laz-popup-visible),
+html body .popup.loadinglogin:not(.laz-popup-visible) {
+  display: none !important;
+}
+
+html body .popup.account_login.laz-popup-visible,
+html body .popup.loadinglogin.laz-popup-visible {
+  display: flex !important;
+}
+
+html body .overlay,
+html body .overlay div,
+html body .overlay span,
+html body .overlay p,
+html body .overlay a,
+html body .overlay button,
+html body .overlay label,
+html body .overlay input {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+html body .overlay .g-input,
+html body .overlay .g-label {
+  font-family: "Roboto", Arial, sans-serif !important;
+}
+
+html body .laz-login-btns {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 12px !important;
+  padding: 0 !important;
+  width: 50% !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+}
+
+html body .laz-load-card {
+  width: min(450px, 92vw) !important;
+  border-radius: 0 !important;
+}
+
+html body .laz-login-card {
+  width: min(440px, 96vw) !important;
+  border-radius: 0 !important;
+}
+
+html body .laz-load-overlay {
+  left: 8px !important;
+  right: 8px !important;
+  bottom: 20px !important;
+  padding: 0 !important;
+  background: none !important;
+}
+
+html body .laz-load-label {
+  width: 100% !important;
+  text-align: center !important;
+  font-family: 'lazaLatinFixed', Arial, sans-serif !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  margin: 0 0 5px !important;
+  letter-spacing: 0 !important;
+}
+
+html body .laz-bar-track {
+  height: 5px !important;
+  border-radius: 0 !important;
+  background: rgba(55,55,55,0.82) !important;
+  border: 1px solid rgba(255,255,255,0.55) !important;
+}
+
+html body #lazBarFill {
+  border-radius: 0 !important;
+  background: linear-gradient(90deg, #e69000 0%, #ffc400 75%, #ffe066 100%) !important;
+}
+
+html body .laz-btn-fb,
+html body .laz-btn-gg {
+  width: 100% !important;
+  height: 30px !important;
+  min-height: 25px !important;
+  margin: 0 auto !important;
+  gap: 6px !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  background-size: 100% 100% !important;
+}
+
+html body .laz-btn-fb .fab,
+html body .laz-btn-fb .fa-facebook-f {
+  font-size: 13px !important;
+}
+
+html body .laz-gg-svg {
+  width: 13px !important;
+  height: 13px !important;
+}
+
+html body .laz-or-div {
+  font-size: 9px !important;
+  line-height: 1 !important;
+}
