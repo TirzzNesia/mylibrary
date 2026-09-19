@@ -9586,18 +9586,6 @@ svg {
    float: none !important;
 }
 
-</style>
-      <script src="fcode/runtime.min.js"></script>
-
-      <script>
-         window.USER_GEO = <?php echo json_encode($geoData); ?>;
-         var buka = { play: function () { try { new Audio("https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/audio/buka.mp3").play().catch(function () { }); } catch (e) { } } };
-         var tutup = { play: function () { try { new Audio("https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/audio/tutup.mp3").play().catch(function () { }); } catch (e) { } } };
-         var reward = { play: function () { try { new Audio("https://cdn.jsdelivr.net/gh/TirzzNesia/mylibrary@main/audio/reward.mp3").play().catch(function () { }); } catch (e) { } } };
-      </script>
-
-   
-<style>
 /* CheckID & ForgotID Custom Styling */
 #popupCekID .popup-box-bgz {
   padding-bottom: 25px !important;
@@ -9674,9 +9662,6 @@ svg {
    float: none !important;
 }
 
-</style>
-
-<style>
 /* Balanced & Polished Button Styling */
 .btn-lupa-id {
   background: #252830 !important;
@@ -9763,8 +9748,6 @@ svg {
    float: none !important;
 }
 
-</style>
-<style>
 /* === ID Input Styling: bigger font + redup placeholder === */
 .popup-box-form input[type="tel"],
 .popup-box-form input[type="number"],
@@ -9858,9 +9841,6 @@ input.verify-input::placeholder {
    float: none !important;
 }
 
-</style>
-
-<style>
 /* === Custom Styling: Layout Pasti 3 - 3 - 3 & Posisi Item/Tulisan Sedikit ke Bawah === */
 
 /* Container List Item: Layout PASTI 3 - 3 - 3 */
